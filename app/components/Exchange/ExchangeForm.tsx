@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import CurrencySelect from "./CurrencySelect";
+import axios from "axios";
 const fiatCurrencies = [
   { code: "USD", name: "US Dollar", icon: "/flags/usd.svg", network: "" },
   { code: "EUR", name: "Euro", icon: "/flags/eur.svg", network: "" },
@@ -27,14 +28,52 @@ export default function ExchangeForm() {
   const [receiveAmount, setReceiveAmount] = useState("");
   const [sellCurrency, setSellCurrency] = useState(fiatCurrencies[0]);
   const [receiveCurrency, setReceiveCurrency] = useState(cryptoCurrencies[0]);
-  const [exchangeRate, setExchangeRate] = useState(0.24984); // TRX to USD
+  const [exchangeRate, setExchangeRate] = useState(0);
 
-  // Auto calculate result
+  // Получение курса обмена с CoinGecko
+  useEffect(() => {
+    const fetchExchangeRate = async () => {
+      try {
+        const from = receiveCurrency.code.toLowerCase(); // крипта
+        const to = sellCurrency.code.toLowerCase(); // фиат
+        const res = await axios.get(
+          `https://api.coingecko.com/api/v3/simple/price?ids=${mapToGeckoId(
+            from
+          )}&vs_currencies=${to}`
+        );
+        const rate = res.data[mapToGeckoId(from)][to];
+        setExchangeRate(rate);
+      } catch (error) {
+        console.error("Ошибка при получении курса:", error);
+        setExchangeRate(0);
+      }
+    };
+
+    fetchExchangeRate();
+  }, [sellCurrency, receiveCurrency]);
+
+  // Пересчёт суммы
   useEffect(() => {
     const amount = parseFloat(sellAmount.replace(/[^0-9.]/g, ""));
-    const result = (amount / exchangeRate).toFixed(6);
-    setReceiveAmount(result);
+    if (!isNaN(amount) && exchangeRate > 0) {
+      const result = (amount / exchangeRate).toFixed(6);
+      setReceiveAmount(result);
+    } else {
+      setReceiveAmount("0");
+    }
   }, [sellAmount, exchangeRate]);
+
+  // 👇 Маппер названий криптовалют CoinGecko
+  const mapToGeckoId = (code: string) => {
+    const mapping: Record<string, string> = {
+      btc: "bitcoin",
+      eth: "ethereum",
+      trx: "tron",
+      usdt: "tether",
+      ton: "the-open-network", // может потребовать проверки
+    };
+    return mapping[code] || code;
+  };
 
   return (
     <div className="max-w-[1300px] w-full mx-auto px-5 sm:px-10 md:px-20 relative z-10">
