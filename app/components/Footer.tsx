@@ -1,9 +1,43 @@
 import React from "react";
 
 export default function Footer() {
+  const banks = [
+    {
+      name: "Альфа-банк",
+      logo: "/banks/alfa.png",
+    },
+    {
+      name: "Беларусбанк",
+      logo: "/banks/belb.png",
+    },
+    {
+      name: "Visa",
+      logo: "/banks/visa.png",
+    },
+    {
+      name: "Visa",
+      logo: "/banks/visa2.png",
+    },
+    {
+      name: "Master",
+      logo: "/banks/master.png",
+    },
+    {
+      name: "Master",
+      logo: "/banks/id_check.png",
+    },
+    {
+      name: "Belcart",
+      logo: "/banks/belcart.png",
+    },
+    {
+      name: "Belcart",
+      logo: "/banks/belcart2.png",
+    },
+  ];
   return (
     <footer className="py-4 md:py-0">
-      <div className="container mx-auto px-5 sm:px-20">
+      <div className="mx-auto px-5 sm:px-20">
         <div className="flex flex-col items-center">
           <h2 className="text-4xl md:text-5xl font-medium text-[#1E1E28]">
             Мы на связи
@@ -16,7 +50,7 @@ export default function Footer() {
             </div>
           </button>
 
-          <div className="flex justify-center gap-5 mt-24 md:mt-32 text-lg text-[#1E1E28]">
+          <div className="flex justify-around gap-80 mt-24 md:mt-32 text-lg text-[#1E1E28]">
             <a href="#" className="hover:text-[#0069FF] transition-colors">
               Вопросы-ответы
             </a>
@@ -28,6 +62,20 @@ export default function Footer() {
             </a>
           </div>
 
+          <div className="flex border-y-1 border-[#dfdfdf] py-8 gap-8 overflow-auto justify-center w-full my-8">
+            {banks.map((bank, index) => (
+              <div
+                key={index}
+                className="flex flex-col items-center justify-center gap-2 cursor-pointer"
+              >
+                <img
+                  src={bank.logo}
+                  alt={bank.name}
+                  className=" object-cover"
+                />
+              </div>
+            ))}
+          </div>
           <div className="w-full mt-8 overflow-hidden">
             <img
               src="/divider.svg"

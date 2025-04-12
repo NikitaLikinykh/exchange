@@ -52,7 +52,7 @@ export default function NewsSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12 ">
           {newsItems.map((item, index) => (
-            <div key={index} className="flex flex-col">
+            <div key={index} className="flex flex-col cursor-pointer">
               <div className="rounded-lg overflow-hidden">
                 <img
                   src={item.imageSrc}
