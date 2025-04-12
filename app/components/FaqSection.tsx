@@ -48,8 +48,8 @@ export default function FaqSection() {
   };
 
   return (
-    <section className="py-16 md:py-24">
-      <div className="container mx-auto px-5 sm:px-20">
+    <section className="py-16 md:py-24 max-w-[1300px] w-[65%] mx-auto">
+      <div className="mx-auto px-5 sm:px-0">
         <h2 className="text-4xl md:text-5xl font-medium text-[#1E1E28] mb-16 md:mb-24">
           Частые вопросы
         </h2>

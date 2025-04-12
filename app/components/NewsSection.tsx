@@ -44,15 +44,15 @@ export default function NewsSection() {
   ];
 
   return (
-    <section className="py-16 md:py-24 max-w-[1075px] mx-auto">
-      <div className="container mx-auto ">
-        <h2 className="text-4xl md:text-5xl font-medium text-[#1E1E28] mb-16 md:mb-24">
+    <section className="py-16 md:py-24 max-w-[1300px] w-[65%] mx-auto">
+      <div className=" mx-auto ">
+        <h2 className="text-4xl md:text-5xl font-medium text-[#1E1E28] mb-16 md:mb-24 text-center">
           Новости
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-12 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12 ">
           {newsItems.map((item, index) => (
-            <div key={index} className="flex flex-col max-w-[510px]">
+            <div key={index} className="flex flex-col">
               <div className="rounded-lg overflow-hidden">
                 <img
                   src={item.imageSrc}
