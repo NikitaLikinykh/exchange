@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-
+import CurrencySelect from "./CurrencySelect";
 const fiatCurrencies = [
-  { code: "USD", name: "US Dollar", icon: "/flags/usd.svg" },
-  { code: "EUR", name: "Euro", icon: "/flags/eur.svg" },
-  { code: "RUB", name: "Russian Ruble", icon: "/flags/rub.svg" },
-  { code: "BYN", name: "Belarusian Ruble", icon: "/flags/byn.svg" },
+  { code: "USD", name: "US Dollar", icon: "/flags/usd.svg", network: "" },
+  { code: "EUR", name: "Euro", icon: "/flags/eur.svg", network: "" },
+  { code: "RUB", name: "Russian Ruble", icon: "/flags/rub.svg", network: "" },
+  {
+    code: "BYN",
+    name: "Belarusian Ruble",
+    icon: "/flags/byn.svg",
+    network: "",
+  },
 ];
 
 const cryptoCurrencies = [
@@ -61,16 +66,11 @@ export default function ExchangeForm() {
                   onChange={(e) => setSellAmount(e.target.value)}
                   className="flex-1 text-lg font-bold outline-none"
                 />
-                <div className="flex items-center bg-gray-100 rounded p-1 ml-2">
-                  <img
-                    src={sellCurrency.icon}
-                    alt={sellCurrency.code}
-                    className="h-6 w-6"
-                  />
-                  <span className="ml-1 text-sm font-bold">
-                    {sellCurrency.code}
-                  </span>
-                </div>
+                <CurrencySelect
+                  selected={sellCurrency}
+                  options={fiatCurrencies}
+                  onSelect={setSellCurrency}
+                />
               </div>
             </div>
 
@@ -91,21 +91,11 @@ export default function ExchangeForm() {
                   readOnly
                   className="flex-1 text-lg font-bold text-gray-600 outline-none"
                 />
-                <div className="flex items-center bg-white rounded p-1 ml-2">
-                  <img
-                    src={receiveCurrency.icon}
-                    alt={receiveCurrency.code}
-                    className="h-6 w-6"
-                  />
-                  <div className="flex flex-col ml-1">
-                    <span className="font-bold text-sm">
-                      {receiveCurrency.code}
-                    </span>
-                    <span className="text-[#0069FF] text-xs">
-                      {receiveCurrency.network}
-                    </span>
-                  </div>
-                </div>
+                <CurrencySelect
+                  selected={receiveCurrency}
+                  options={cryptoCurrencies}
+                  onSelect={setReceiveCurrency}
+                />
               </div>
             </div>
           </div>
