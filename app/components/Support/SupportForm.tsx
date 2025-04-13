@@ -131,7 +131,7 @@ export default function SupportForm() {
             <label htmlFor="fileUpload" className="cursor-pointer">
               <img
                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/d262e378d643f0d3fb8b7f8dba9e937356e17a73?placeholderIfAbsent=true"
-                className="object-contain self-center w-10 aspect-square"
+                className="object-contain self-center w-10 aspect-square m-auto"
                 alt="Upload icon"
               />
               <div className="mt-4">
@@ -161,7 +161,7 @@ export default function SupportForm() {
         </div>
 
         <div className="flex flex-wrap gap-2.5 self-start mt-8 text-sm text-slate-400">
-          <div className="flex items-center">
+          <div className="flex items-center gap-2">
             <input
               type="checkbox"
               id="acceptTerms"
@@ -170,14 +170,19 @@ export default function SupportForm() {
               onChange={handleCheckboxChange}
               className="w-6 h-6 rounded-xl border border-solid border-stone-300"
             />
+            <label
+              htmlFor="acceptTerms"
+              className="flex-auto max-md:max-w-full"
+            >
+              Нажимая на кнопку «Отправить», я даю свое согласие на обработку
+              моих персональных
+              <br />
+              данных для получения обратной связи в соответствии с{" "}
+              <span className="text-blue-700">
+                Политикой обработки персональных данных
+              </span>
+            </label>
           </div>
-          <label htmlFor="acceptTerms" className="flex-auto max-md:max-w-full">
-            Нажимая на кнопку «Отправить», я даю свое согласие на обработку моих
-            персональных
-            <br />
-            данных для получения обратной связи в соответствии с{" "}
-            <span className="text-blue-700">данных</span>
-          </label>
         </div>
 
         <button
