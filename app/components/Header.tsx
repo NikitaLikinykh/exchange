@@ -27,7 +27,7 @@ export default function Header() {
               Новости
             </Link>
             <Link
-              href="#"
+              href="/documents"
               className="text-white hover:text-blue-100 transition-colors"
             >
               Документы
