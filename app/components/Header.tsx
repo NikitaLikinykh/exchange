@@ -33,7 +33,7 @@ export default function Header() {
               Документы
             </Link>
             <Link
-              href="#"
+              href="/support"
               className="text-white hover:text-blue-100 transition-colors"
             >
               Поддержка
