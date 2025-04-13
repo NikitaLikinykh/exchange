@@ -21,7 +21,7 @@ export default function Header() {
               Вопросы-ответы
             </Link>
             <Link
-              href="#"
+              href="/media"
               className="text-white hover:text-blue-100 transition-colors"
             >
               Новости

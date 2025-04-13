@@ -169,7 +169,7 @@ export default function ExchangeForm() {
                   type="text"
                   value={receiveAmount}
                   readOnly
-                  className="flex-1 text-lg font-bold text-gray-600 outline-none"
+                  className="flex-1 text-lg font-bold text-[#8f9db1] outline-none"
                 />
                 <div className="absolute right-3">
                   <CurrencySelect
