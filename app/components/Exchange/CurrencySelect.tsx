@@ -24,15 +24,22 @@ function CurrencySelect({ selected, options, onSelect }: CurrencySelectProps) {
   return (
     <div className="relative">
       <div
-        className="flex items-center rounded p-1 ml-2 cursor-pointer gap-1"
+        className="flex items-center rounded p-1 ml-2 cursor-pointer gap-1  bg-white   transition-shadow"
         onClick={() => setOpen(!open)}
       >
         <img src={selected.icon} alt={selected.code} className="h-6 w-6" />
         <span className="ml-1 text-lg font-bold">{selected.code}</span>
+        <img
+          src="/arrow-bottom.svg"
+          alt="Dropdown"
+          className={`h-4 w-4 transform transition-transform ${
+            open ? "rotate-180" : "rotate-0"
+          }`}
+        />
       </div>
 
       {open && (
-        <div className="absolute z-50 mt-2 bg-white border rounded shadow-md w-40 max-h-60 overflow-y-auto">
+        <div className="absolute  z-50 mt-2 left-0 bg-white  rounded shadow-lg w-[120px] ">
           {options.map((currency) => (
             <div
               key={currency.code + currency.network}

@@ -137,18 +137,20 @@ export default function ExchangeForm() {
               <label className="block text-gray-700 text-sm mb-3 ml-2">
                 Продаю
               </label>
-              <div className="flex items-center border border-gray-200 rounded-lg p-3 py-2">
+              <div className="flex items-center border border-gray-200 rounded-lg p-3 py-2 relative">
                 <input
                   type="text"
                   value={sellAmount}
                   onChange={(e) => setSellAmount(e.target.value)}
                   className="flex-1 text-lg font-bold outline-none"
                 />
-                <CurrencySelect
-                  selected={sellCurrency}
-                  options={fiatCurrencies}
-                  onSelect={setSellCurrency}
-                />
+                <div className="absolute right-3">
+                  <CurrencySelect
+                    selected={sellCurrency}
+                    options={fiatCurrencies}
+                    onSelect={setSellCurrency}
+                  />
+                </div>
               </div>
             </div>
 
@@ -162,18 +164,20 @@ export default function ExchangeForm() {
               <label className="block text-gray-700 text-sm mb-3 ml-2">
                 Получаю
               </label>
-              <div className="flex items-center border border-gray-200 rounded-lg p-3 py-2">
+              <div className="flex items-center border border-gray-200 rounded-lg p-3 py-2 relative">
                 <input
                   type="text"
                   value={receiveAmount}
                   readOnly
                   className="flex-1 text-lg font-bold text-gray-600 outline-none"
                 />
-                <CurrencySelect
-                  selected={receiveCurrency}
-                  options={cryptoCurrencies}
-                  onSelect={setReceiveCurrency}
-                />
+                <div className="absolute right-3">
+                  <CurrencySelect
+                    selected={receiveCurrency}
+                    options={cryptoCurrencies}
+                    onSelect={setReceiveCurrency}
+                  />
+                </div>
               </div>
             </div>
           </div>
