@@ -1,0 +1,39 @@
+<svg width="24px" height="24px" viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Exchange-form-specification" transform="translate(-910.000000, -1907.000000)">
+            <g id="Group-2" transform="translate(599.000000, 1455.000000)">
+                <g id="Exchange-form-Copy-5" transform="translate(0.000000, 52.000000)">
+                    <g id="Selector" transform="translate(295.000000, 140.000000)">
+                        <g id="ETH" transform="translate(0.000000, 248.000000)">
+                            <g id="Icon/Currency/ETH" transform="translate(16.000000, 12.000000)">
+                                <g id="eth">
+                                    <circle id="Oval" fill="#627EEA" fill-rule="nonzero" cx="12"
+                                        cy="12"
+                                        r="12"></circle>
+                                    <g id="Group" transform="translate(6.750000, 3.000000)"
+                                        fill="#FFFFFF" fill-rule="nonzero">
+                                        <polygon id="Path" fill-opacity="0.602"
+                                            points="5.6235 0 5.6235 6.6525 11.24625 9.165"></polygon>
+                                        <polygon id="Path" points="5.6235 0 0 9.165 5.6235 6.6525">
+                                        </polygon>
+                                        <polygon id="Path" fill-opacity="0.602"
+                                            points="5.6235 13.476 5.6235 17.99625 11.25 10.212">
+                                        </polygon>
+                                        <polygon id="Path"
+                                            points="5.6235 17.99625 5.6235 13.47525 0 10.212"></polygon>
+                                        <polygon id="Path" fill-opacity="0.2"
+                                            points="5.6235 12.42975 11.24625 9.165 5.6235 6.654">
+                                        </polygon>
+                                        <polygon id="Path" fill-opacity="0.602"
+                                            points="0 9.165 5.6235 12.42975 5.6235 6.654"></polygon>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

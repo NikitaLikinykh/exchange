@@ -24,11 +24,11 @@ function CurrencySelect({ selected, options, onSelect }: CurrencySelectProps) {
   return (
     <div className="relative">
       <div
-        className="flex items-center bg-gray-100 rounded p-1 ml-2 cursor-pointer"
+        className="flex items-center rounded p-1 ml-2 cursor-pointer gap-1"
         onClick={() => setOpen(!open)}
       >
         <img src={selected.icon} alt={selected.code} className="h-6 w-6" />
-        <span className="ml-1 text-sm font-bold">{selected.code}</span>
+        <span className="ml-1 text-lg font-bold">{selected.code}</span>
       </div>
 
       {open && (
@@ -42,7 +42,7 @@ function CurrencySelect({ selected, options, onSelect }: CurrencySelectProps) {
               <img
                 src={currency.icon}
                 alt={currency.code}
-                className="h-5 w-5"
+                className="h-7 w-7"
               />
               <div className="flex flex-col">
                 <span className="text-sm font-medium">{currency.code}</span>

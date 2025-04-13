@@ -3,24 +3,63 @@ import Image from "next/image";
 import CurrencySelect from "./CurrencySelect";
 import axios from "axios";
 const fiatCurrencies = [
-  { code: "USD", name: "US Dollar", icon: "/flags/usd.svg", network: "" },
-  { code: "EUR", name: "Euro", icon: "/flags/eur.svg", network: "" },
-  { code: "RUB", name: "Russian Ruble", icon: "/flags/rub.svg", network: "" },
+  { code: "USD", name: "US Dollar", icon: "/currency/usd.svg", network: "" },
+  { code: "EUR", name: "Euro", icon: "/currency/eur.svg", network: "" },
+  {
+    code: "RUB",
+    name: "Russian Ruble",
+    icon: "/currency/rub.svg",
+    network: "",
+  },
   {
     code: "BYN",
     name: "Belarusian Ruble",
-    icon: "/flags/byn.svg",
+    icon: "/currency/byn.svg",
     network: "",
   },
 ];
 
 const cryptoCurrencies = [
-  { code: "TRX", name: "Tron", icon: "/crypto/trx.svg", network: "TRC20" },
-  { code: "BTC", name: "Bitcoin", icon: "/crypto/btc.svg", network: "" },
-  { code: "ETH", name: "Ethereum", icon: "/crypto/eth.svg", network: "" },
-  { code: "USDT", name: "Tether", icon: "/crypto/usdt.svg", network: "ERC20" },
-  { code: "USDT", name: "Tether", icon: "/crypto/usdt.svg", network: "TRC20" },
-  { code: "TON", name: "Toncoin", icon: "/crypto/ton.svg", network: "" },
+  {
+    code: "BTC",
+    name: "Bitcoin",
+    icon: "/currency/btc.svg",
+    network: "Bitcoin",
+  },
+  {
+    code: "ETH",
+    name: "Ethereum",
+    icon: "/currency/ethereum.svg",
+    network: "Ethereum",
+  },
+  {
+    code: "USDT",
+    name: "Tether",
+    icon: "/currency/t.svg",
+    network: "ERC20",
+  },
+  { code: "TRX", name: "Tron", icon: "/currency/trc20.svg", network: "TRC20" },
+
+  {
+    code: "USDT",
+    name: "Tether",
+    icon: "/currency/trx20.svg",
+    network: "TRC20",
+  },
+  { code: "TON", name: "Toncoin", icon: "/currency/ton.svg", network: "" },
+  {
+    code: "USD₮",
+    name: "USDTON",
+    icon: "/currency/usdton.svg",
+    network: "TON",
+  },
+
+  {
+    code: "WBP",
+    name: "Toncoin",
+    icon: "/currency/wbtrc.svg",
+    network: "TRC20",
+  },
 ];
 
 export default function ExchangeForm() {
@@ -70,7 +109,7 @@ export default function ExchangeForm() {
       eth: "ethereum",
       trx: "tron",
       usdt: "tether",
-      ton: "the-open-network", // может потребовать проверки
+      ton: "the-open-network",
     };
     return mapping[code] || code;
   };
@@ -98,7 +137,7 @@ export default function ExchangeForm() {
               <label className="block text-gray-700 text-sm mb-3 ml-2">
                 Продаю
               </label>
-              <div className="flex items-center border border-gray-200 rounded-lg p-3">
+              <div className="flex items-center border border-gray-200 rounded-lg p-3 py-2">
                 <input
                   type="text"
                   value={sellAmount}
@@ -123,7 +162,7 @@ export default function ExchangeForm() {
               <label className="block text-gray-700 text-sm mb-3 ml-2">
                 Получаю
               </label>
-              <div className="flex items-center border border-gray-200 rounded-lg p-3">
+              <div className="flex items-center border border-gray-200 rounded-lg p-3 py-2">
                 <input
                   type="text"
                   value={receiveAmount}
