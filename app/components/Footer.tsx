@@ -62,16 +62,16 @@ export default function Footer() {
             </a>
           </div>
 
-          <div className="flex border-y-1 border-[#dfdfdf] py-8 gap-8 overflow-x-scroll lg:overflow-hidden justify-center w-full my-8">
+          <div className="flex border-y-1 border-[#dfdfdf] py-8 gap-8 overflow-x-auto lg:overflow-hidden justify-center w-full my-8">
             {banks.map((bank, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center justify-center gap-2 cursor-pointer"
+                className="flex flex-col items-center justify-center gap-2 cursor-pointer flex-shrink-0"
               >
                 <img
                   src={bank.logo}
                   alt={bank.name}
-                  className=" object-cover"
+                  className="object-contain w-16 h-16"
                 />
               </div>
             ))}
