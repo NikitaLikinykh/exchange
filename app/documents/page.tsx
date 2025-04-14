@@ -96,7 +96,7 @@ export default function DocumentsPage() {
         </div>
       </div>
 
-      <div className="box-border grid gap-6 p-12 mx-auto my-0 grid-cols-[repeat(4,1fr)] max-md:p-6 max-md:grid-cols-[repeat(2,1fr)] max-sm:p-4 max-sm:grid-cols-[1fr] bg-[#0069FF]">
+      <div className="box-border grid gap-6 p-6 mx-auto my-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 bg-[#0069FF]">
         {documents.map((doc, index) => (
           <DocumentCard
             key={index}

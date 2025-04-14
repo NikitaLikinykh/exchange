@@ -12,7 +12,7 @@ export default function DocumentCard({
   downloadLabel,
 }: DocumentCardProps) {
   return (
-    <div className="box-border flex flex-col p-6 m-0 bg-white rounded-lg h-[204px]">
+    <div className="box-border flex flex-col p-6 m-0 bg-white rounded-lg h-auto max-w-[300px] sm:max-w-none">
       <div>
         <svg
           width="25"
@@ -30,13 +30,13 @@ export default function DocumentCard({
           />
         </svg>
       </div>
-      <div className="box-border p-0 m-0 mb-auto text-lg leading-8 text-neutral-800">
+      <div className="box-border p-0 m-0 mb-auto text-lg leading-8 text-neutral-800 text-center sm:text-left">
         {title}
       </div>
-      <div className="box-border flex gap-3.5 p-0 m-0 mt-5">
+      <div className="box-border flex flex-col sm:flex-row gap-3.5 p-0 m-0 mt-5">
         <a
           href={readLink}
-          className="box-border p-0 m-0 text-lg text-sky-500 no-underline"
+          className="box-border p-0 m-0 text-lg text-sky-500 no-underline text-center sm:text-left"
         >
           Читать
         </a>
