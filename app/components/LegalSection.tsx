@@ -41,9 +41,12 @@ export default function LegalSection() {
 
         {/* Cards grid */}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-10 h-full">
+        <div className="flex gap-10 h-full overflow-x-auto md:grid md:grid-cols-2 xl:grid-cols-4 md:overflow-visible whitespace-nowrap">
           {legalCards.map((card, index) => (
-            <div className="relative rounded-2xl overflow-hidden" key={index}>
+            <div
+              className="relative rounded-2xl overflow-hidden inline-block w-full md:w-auto flex-shrink-0 max-w-[270px] md:max-w-none"
+              key={index}
+            >
               <img
                 src={card.imageSrc}
                 alt={card.title}
@@ -51,7 +54,7 @@ export default function LegalSection() {
               />
               <div className="absolute h-full flex flex-col justify-end bottom-5 left-10">
                 {card.title !== "Поддержка" && (
-                  <button className="bg-white border border-[#F6F6F6] rounded-lg px-4 py-1 text-[#1E1E28] text-lg font-normal  cursor-pointer">
+                  <button className="bg-white border border-[#F6F6F6] rounded-lg px-4 py-1 text-[#1E1E28] text-lg font-normal cursor-pointer">
                     Узнать больше
                   </button>
                 )}
