@@ -23,30 +23,21 @@ const FaqItem: React.FC<FaqItemProps> = ({
         <div className="box-border p-0 m-0 text-lg text-neutral-800 max-sm:text-base">
           {question}
         </div>
-        <div>
-          {isExpanded ? (
-            <svg
-              width="18"
-              height="10"
-              viewBox="0 0 18 10"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="arrow-icon"
-            >
-              <path d="M1.5 9L9 1.5L16.5 9" stroke="#ACB3BC"></path>
-            </svg>
-          ) : (
-            <svg
-              width="18"
-              height="11"
-              viewBox="0 0 18 11"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="arrow-icon"
-            >
-              <path d="M1.5 9.5L9 2L16.5 9.5" stroke="#ACB3BC"></path>
-            </svg>
-          )}
+        <div
+          className={`transform transition-transform ${
+            isExpanded ? "rotate-180" : "rotate-0"
+          }`}
+        >
+          <svg
+            width="18"
+            height="10"
+            viewBox="0 0 18 10"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="arrow-icon"
+          >
+            <path d="M1.5 9L9 1.5L16.5 9" stroke="#ACB3BC"></path>
+          </svg>
         </div>
       </div>
       {isExpanded && (

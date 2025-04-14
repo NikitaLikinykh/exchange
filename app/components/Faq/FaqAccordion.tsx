@@ -19,7 +19,7 @@ interface FaqAccordionProps {
 
 const FaqAccordion: React.FC<FaqAccordionProps> = ({ categories }) => {
   const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>(
-    {},
+    {}
   );
 
   const toggleItem = (id: string) => {
@@ -45,7 +45,7 @@ const FaqAccordion: React.FC<FaqAccordionProps> = ({ categories }) => {
             <FaqItem
               key={item.id}
               question={item.question}
-              isExpanded={!!expandedItems[item.id]}
+              isExpanded={!!expandedItems[item.id]} // Pass isExpanded prop
               onToggle={() => toggleItem(item.id)}
             >
               {item.answer}
