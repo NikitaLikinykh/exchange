@@ -155,7 +155,7 @@ export default function ExchangeForm() {
             </div>
 
             {/* Exchange icon */}
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center relative top-0 md:top-4">
               <img src="/exchange.svg" alt="Exchange" className="w-5 h-6" />
             </div>
 

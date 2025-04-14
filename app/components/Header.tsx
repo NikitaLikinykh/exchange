@@ -9,7 +9,7 @@ export default function Header() {
       <div className="lg:hidden">
         <HeaderMobile />
       </div>
-      <header className="hidden lg:block w-full bg-[#0069FF] pb-7">
+      <header className="hidden lg:block w-full bg-[#0069FF] py-5">
         <div className="container mx-auto  sm:px-20 lg:px-0">
           <div className="flex items-center justify-between gap-10 py-4">
             <div className="flex-shrink-0">
@@ -47,14 +47,14 @@ export default function Header() {
 
             <div className="hidden md:flex items-center space-x-4">
               <Link
-                href="#"
-                className="px-4 py-2 text-white border border-white rounded-md hover:bg-white hover:text-[#0069FF] transition-colors"
+                href="/register"
+                className="bg-white text-black text-md px-4 py-1.5 rounded-md shadow-sm hover:bg-gray-100 transition"
               >
                 Регистрация
               </Link>
               <Link
-                href="#"
-                className="px-4 py-2 bg-white text-[#0069FF] rounded-md hover:bg-blue-100 transition-colors"
+                href="/login"
+                className="bg-white text-black text-md px-4 py-1.5 rounded-md shadow-sm hover:bg-gray-100 transition"
               >
                 Войти
               </Link>
