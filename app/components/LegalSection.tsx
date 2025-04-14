@@ -27,7 +27,7 @@ export default function LegalSection() {
   ];
   return (
     <section className="py-16 md:py-24">
-      <div className="mx-auto px-12  sm:px-22">
+      <div className="mx-auto px-5  sm:px-22">
         {/* Section heading */}
         <div className="text-center max-w-4xl mx-auto mb-14">
           <h2 className="text-3xl md:text-4xl font-medium text-[#1E1E28]">

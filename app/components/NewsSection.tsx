@@ -44,7 +44,7 @@ export default function NewsSection() {
   ];
 
   return (
-    <section className="py-16 md:py-24 max-w-[1300px] w-[65%] mx-auto">
+    <section className="py-16 md:py-24 max-w-[1300px] w-[100%] px-4 lg:px-5  lg:w-[65%] mx-auto">
       <div className=" mx-auto ">
         <h2 className="text-4xl md:text-5xl font-medium text-[#1E1E28] mb-16 md:mb-24 text-center">
           Новости

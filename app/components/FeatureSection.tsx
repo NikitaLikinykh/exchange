@@ -20,10 +20,12 @@ export default function FeatureSection({
     <section className="py-12 md:py-24">
       <div className="container mx-auto px-5 sm:px-20">
         <div
-          className={`flex flex-col ${reversed ? "md:flex-row-reverse" : "md:flex-row"} gap-5 md:gap-10 items-center`}
+          className={`flex flex-col ${
+            reversed ? "md:flex-row-reverse" : "md:flex-row"
+          } gap-5 md:gap-10 items-center`}
         >
           <div className="w-full md:w-1/2">
-            <div className="flex flex-col justify-center h-full">
+            <div className="flex flex-col justify-center h-full text-center sm:text-left">
               <h2 className="text-3xl md:text-4xl font-medium text-[#1E1E28] leading-tight">
                 {title}
               </h2>

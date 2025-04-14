@@ -36,9 +36,9 @@ export default function Footer() {
     },
   ];
   return (
-    <footer className="py-4 md:py-0">
+    <footer className="py-0 lg:py-4 md:py-0">
       <div className="mx-auto px-5 sm:px-20">
-        <div className="flex flex-col items-center py-20">
+        <div className="flex flex-col items-center">
           <h2 className="text-4xl md:text-5xl font-medium text-[#1E1E28]">
             Мы на связи
           </h2>
@@ -50,7 +50,7 @@ export default function Footer() {
             </div>
           </button>
 
-          <div className="flex justify-around gap-80 mt-24 md:mt-32 text-lg text-[#1E1E28]">
+          <div className="flex justify-around gap-8 md:gap-10 lg:gap-80 mt-24 md:mt-32 text-lg text-[#1E1E28] flex-wrap px-4">
             <a href="#" className="hover:text-[#0069FF] transition-colors">
               Вопросы-ответы
             </a>
@@ -62,7 +62,7 @@ export default function Footer() {
             </a>
           </div>
 
-          <div className="flex border-y-1 border-[#dfdfdf] py-8 gap-8 overflow-auto justify-center w-full my-8">
+          <div className="flex border-y-1 border-[#dfdfdf] py-8 gap-8 overflow-x-scroll lg:overflow-hidden justify-center w-full my-8">
             {banks.map((bank, index) => (
               <div
                 key={index}
