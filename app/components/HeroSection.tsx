@@ -17,11 +17,11 @@ export default function HeroSection() {
       </div>
 
       {/* Hero content */}
-      <div className="container mx-auto px-5 sm:px-20 text-center text-white pb-12">
+      <div className="container mx-auto px-5 sm:px-20 text-center text-white pb-6">
         <h1 className="text-4xl md:text-6xl font-bold leading-tight tracking-wide">
           Просто. Быстро. Крипто.
         </h1>
-        <p className="text-xl md:text-3xl mt-8 md:mt-10 text-[#ffffff99]">
+        <p className="text-xl md:text-3xl mt-4 md:mt-5 text-[#ffffff99]">
           Удобный и выгодный обмен криптовалют
         </p>
       </div>

@@ -116,6 +116,9 @@ export default function ExchangeForm() {
 
   return (
     <div className="max-w-[1300px] w-full mx-auto px-5 sm:px-10 md:px-20 relative z-10">
+      <p className="text-[#9cc3ff] pb-1">
+        VIP курс если продаёте от 20 тыс. USDT
+      </p>
       <div className="bg-white rounded-lg shadow-lg p-5 md:p-5 -mb-20">
         <div className="flex justify-between items-center py-2">
           <div className="text-lg font-medium uppercase">
@@ -183,7 +186,7 @@ export default function ExchangeForm() {
           </div>
 
           {/* Fee info */}
-          <div className="flex flex-wrap items-center justify-center text-[#929BA8] mt-4 gap-2 text-sm">
+          <div className="flex flex-wrap items-center justify-center text-[#929BA8]  gap-2 text-sm my-7">
             <span>Включены:</span>
             <div className="flex items-center gap-2 text-center">
               <span>Комисcия сервиса 24.36 USD</span>
