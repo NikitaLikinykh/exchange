@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-
+import Link from "next/link";
 export default function AuthModal() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,9 +17,9 @@ export default function AuthModal() {
   };
 
   return (
-    <div className="flex justify-center items-center p-5 min-h-screen bg-neutral-100">
-      <div className="p-12 bg-white rounded-xl shadow-lg w-[557px] max-md:px-8 max-md:py-10 max-md:max-w-[557px] max-md:w-[90%] max-sm:px-5 max-sm:py-8">
-        <div className="mb-20 text-3xl font-medium leading-9 text-neutral-800 max-sm:mb-12 max-sm:text-2xl">
+    <div className="flex justify-center items-start px-0 min-h-screen bg-[#0069FF] py-30 md:py-10">
+      <div className="p-12 bg-white rounded-xl shadow-lg max-w-[557px] w-full max-md:px-8 max-md:py-10 max-md:max-w-[557px] max-md:w-[90%] max-sm:px-5 max-sm:py-8">
+        <div className="mb-18 text-3xl font-medium leading-9 text-neutral-800 max-sm:mb-4 max-sm:text-2xl">
           Вход в личный кабинет
         </div>
         <form onSubmit={handleSubmit} className="w-[457px] max-md:w-full">
@@ -38,7 +38,7 @@ export default function AuthModal() {
               </div>
             </div>
           </div>
-          <div className="relative mb-9">
+          <div className="relative mb-2">
             <div className="relative w-full">
               <input
                 type={showPassword ? "text" : "password"}
@@ -116,9 +116,9 @@ export default function AuthModal() {
         </form>
         <div className="mt-6 text-base leading-5 text-slate-400 max-sm:text-sm">
           <span>Еще нет аккаунта? </span>
-          <span className="text-blue-600 cursor-pointer">
+          <Link href="/signup" className="text-blue-600 cursor-pointer">
             Зарегистрируйтесь
-          </span>
+          </Link>
         </div>
       </div>
     </div>

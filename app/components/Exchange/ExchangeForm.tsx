@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import CurrencySelect from "./CurrencySelect";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+
 const fiatCurrencies = [
   { code: "USD", name: "US Dollar", icon: "/currency/usd.svg", network: "" },
   { code: "EUR", name: "Euro", icon: "/currency/eur.svg", network: "" },
@@ -63,6 +65,7 @@ const cryptoCurrencies = [
 ];
 
 export default function ExchangeForm() {
+  const router = useRouter();
   const [sellAmount, setSellAmount] = useState("1000");
   const [receiveAmount, setReceiveAmount] = useState("");
   const [sellCurrency, setSellCurrency] = useState(fiatCurrencies[0]);
@@ -199,6 +202,7 @@ export default function ExchangeForm() {
           <button
             type="button"
             className="bg-[#0069FF] text-white rounded-lg py-3 px-8 mt-5 text-lg md:mx-auto block max-w-sm w-full cursor-pointer"
+            onClick={() => router.push("/signin")}
           >
             Обменять
           </button>
