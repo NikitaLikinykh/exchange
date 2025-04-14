@@ -15,7 +15,7 @@ export default function Header() {
 
           <div className="md:flex items-center space-x-8 flex-1 flex justify-around max-w-[820px] w-full text-lg">
             <Link
-              href="#"
+              href="/faq"
               className="text-white hover:text-blue-100 transition-colors"
             >
               Вопросы-ответы

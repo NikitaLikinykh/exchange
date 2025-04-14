@@ -38,7 +38,7 @@ export default function Footer() {
   return (
     <footer className="py-4 md:py-0">
       <div className="mx-auto px-5 sm:px-20">
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center py-20">
           <h2 className="text-4xl md:text-5xl font-medium text-[#1E1E28]">
             Мы на связи
           </h2>
