@@ -1,19 +1,40 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
+import axiosInstance from "@/app/lib/axios";
+import { useRouter } from "next/navigation";
+
 export default function AuthModal() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle login logic here
-    console.log("Login attempt with:", { email, password });
-  };
-
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.message || "Ошибка входа");
+      }
+
+      router.push("/profile");
+    } catch (err: any) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -22,7 +43,7 @@ export default function AuthModal() {
         <div className="mb-18 text-3xl font-medium leading-9 text-neutral-800 max-sm:mb-4 max-sm:text-2xl">
           Вход в личный кабинет
         </div>
-        <form onSubmit={handleSubmit} className="w-[457px] max-md:w-full">
+        <form className="w-[457px] max-md:w-full" onSubmit={handleSubmit}>
           <div className="relative mb-9">
             <div className="relative w-full">
               <input
