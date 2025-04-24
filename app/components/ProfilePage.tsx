@@ -2,6 +2,9 @@
 import React, { useState } from "react";
 import InputText from "./Form/InputText";
 import InputSelect from "./Form/InputSelect";
+import Switch from "./Form/Switch";
+import InputPassword from "./Form/InputPassword";
+
 interface ProfilePageProps {
   user: {
     email: string;
@@ -10,6 +13,8 @@ interface ProfilePageProps {
 }
 export default function ProfilePage({ user }: ProfilePageProps) {
   const [email, setEmail] = useState(user.email || "");
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   return (
     <div className="">
       <div className="bg-[#0069FF] py-6">
@@ -29,14 +34,42 @@ export default function ProfilePage({ user }: ProfilePageProps) {
         </div>
       </div>
       <div className="bg-white p-4 py-10">
-        <div className="max-w-[400px] w-full mx-auto flex flex-col gap-4">
-          <p className="text-lg font-bold">Личные Данные</p>
+        <div className="max-w-[400px] w-full mx-auto flex flex-col gap-8">
+          <p className="text-2xl font-bold">Личные Данные</p>
           <InputText
             label="E-mail"
             value={email}
             onChange={(ev) => setEmail(ev.target.value)}
           />
           <InputSelect />
+        </div>
+      </div>
+      <div className="bg-white p-4 ">
+        <div className="max-w-[400px] w-full mx-auto flex flex-col gap-8">
+          <p className="text-2xl font-bold">Уведомление</p>
+          <div className="flex justify-between">
+            <p className="text-lg font-light">Получать уведомления на Email</p>
+            <Switch />
+          </div>
+        </div>
+      </div>
+      <div className="bg-white p-4 ">
+        <div className="max-w-[400px] w-full mx-auto flex flex-col gap-8">
+          <p className="text-2xl font-bold">Изменить пароль</p>
+          <InputPassword
+            label="Старый пароль"
+            value={oldPassword}
+            onChange={(ev) => {
+              setOldPassword(ev.target.value);
+            }}
+          />
+          <InputPassword
+            label="Новый пароль"
+            value={newPassword}
+            onChange={(ev) => {
+              setNewPassword(ev.target.value);
+            }}
+          />
         </div>
       </div>
     </div>

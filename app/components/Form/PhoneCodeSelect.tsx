@@ -3,6 +3,7 @@ import React, { useState } from "react";
 type Country = {
   code: string;
   name: string;
+
   icon: string;
 };
 
@@ -32,8 +33,8 @@ function PhoneCodeSelect({
         className="flex items-center rounded p-1 ml-2 cursor-pointer gap-1  bg-white   transition-shadow"
         onClick={() => setOpen(!open)}
       >
-        <img src={selected.icon} alt={selected.code} className="h-6 w-6" />
-        <span className="ml-1 text-lg font-bold">{selected.code}</span>
+        <img src={selected.icon} alt={selected.name} className="h-6 w-6" />
+
         <img
           src="/arrow-bottom.svg"
           alt="Dropdown"
@@ -44,7 +45,7 @@ function PhoneCodeSelect({
       </div>
 
       {open && (
-        <div className="absolute z-50 mt-3 left-0 bg-white rounded shadow-lg w-full ">
+        <div className="absolute z-50 mt-3 left-0 bg-white rounded shadow-lg w-[400px] py-2">
           {options.map((country) => (
             <div
               key={country.code}
@@ -53,7 +54,9 @@ function PhoneCodeSelect({
             >
               <img src={country.icon} alt={country.code} className="h-7 w-7" />
               <div className="flex flex-col">
-                <span className="text-sm font-medium">{country.name}</span>
+                <span className="text-sm font-medium">
+                  {country.name} ({country.code})
+                </span>
               </div>
             </div>
           ))}
