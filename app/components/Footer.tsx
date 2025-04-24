@@ -36,14 +36,14 @@ export default function Footer() {
     },
   ];
   return (
-    <footer className="py-0 lg:py-4 md:py-0">
+    <footer className="py-0 lg:py-4 md:py-0 my-20">
       <div className="mx-auto px-5 sm:px-20">
         <div className="flex flex-col items-center">
           <h2 className="text-4xl md:text-5xl font-medium text-[#1E1E28]">
             Мы на связи
           </h2>
 
-          <button className="flex items-center bg-[#0069FF] text-white rounded-lg mt-12 md:mt-16 overflow-hidden cursor-pointer">
+          <button className="flex items-center bg-[#0069FF] text-white rounded-lg mt-12 md:mt-10 overflow-hidden cursor-pointer">
             <span className="px-6 py-4 text-xl">Сообщение в Whitebird</span>
             <div className="w-13 h-13 flex items-center justify-center">
               <img src="/bird.svg" alt="Message" />
