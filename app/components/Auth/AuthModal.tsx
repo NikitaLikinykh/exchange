@@ -25,7 +25,7 @@ export default function AuthModal() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-
+      console.log(res);
       if (!res.ok) {
         const data = await res.json();
         throw new Error(data.message || "Ошибка входа");

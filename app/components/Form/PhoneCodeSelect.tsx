@@ -1,29 +1,28 @@
 import React, { useState } from "react";
 
-type Currency = {
+type Country = {
   code: string;
   name: string;
   icon: string;
-  network: string;
 };
 
-type CurrencySelectProps = {
-  selected: Currency;
-  options: Currency[];
-  onSelect: (currency: Currency) => void;
+type PhoneCodeSelectProps = {
+  selected: Country;
+  options: Country[];
+  onSelect: (currency: Country) => void;
   className?: string;
 };
 
-function CurrencySelect({
+function PhoneCodeSelect({
   selected,
   options,
   onSelect,
   className,
-}: CurrencySelectProps) {
+}: PhoneCodeSelectProps) {
   const [open, setOpen] = useState(false);
 
-  const handleSelect = (currency: Currency) => {
-    onSelect(currency);
+  const handleSelect = (phone: Country) => {
+    onSelect(phone);
     setOpen(false);
   };
 
@@ -45,25 +44,16 @@ function CurrencySelect({
       </div>
 
       {open && (
-        <div className="absolute  z-50 mt-2 left-0 bg-white  rounded shadow-lg w-[120px] ">
-          {options.map((currency) => (
+        <div className="absolute z-50 mt-3 left-0 bg-white rounded shadow-lg w-full ">
+          {options.map((country) => (
             <div
-              key={currency.code + currency.network}
-              onClick={() => handleSelect(currency)}
+              key={country.code}
+              onClick={() => handleSelect(country)}
               className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 cursor-pointer"
             >
-              <img
-                src={currency.icon}
-                alt={currency.code}
-                className="h-7 w-7"
-              />
+              <img src={country.icon} alt={country.code} className="h-7 w-7" />
               <div className="flex flex-col">
-                <span className="text-sm font-medium">{currency.code}</span>
-                {currency.network && (
-                  <span className="text-xs text-gray-500">
-                    {currency.network}
-                  </span>
-                )}
+                <span className="text-sm font-medium">{country.name}</span>
               </div>
             </div>
           ))}
@@ -73,4 +63,4 @@ function CurrencySelect({
   );
 }
 
-export default CurrencySelect;
+export default PhoneCodeSelect;

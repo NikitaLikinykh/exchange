@@ -99,7 +99,7 @@ export default function HeaderMobile() {
               Регистрация
             </Link>
             <Link
-              href="#"
+              href="/profile"
               className="block font-bold"
               onClick={() => setIsMenuOpen(false)}
             >

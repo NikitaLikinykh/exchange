@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import React from "react";
+import ProfilePage from "../components/ProfilePage";
 
 export default async function Page() {
   const cookieStore = cookies();
@@ -22,11 +23,7 @@ export default async function Page() {
 
     const user = await res.json();
     console.log("user>>>>", user);
-    return (
-      <div>
-        <h1>Привет, {user.email}</h1>
-      </div>
-    );
+    return <ProfilePage user={user} />;
   } catch (error) {
     console.error("Ошибка при запросе:", error);
     return <p>Ошибка сервера</p>;

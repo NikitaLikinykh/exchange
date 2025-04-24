@@ -47,13 +47,13 @@ export default function Header() {
 
             <div className="hidden md:flex items-center space-x-4">
               <Link
-                href="/register"
+                href="/signup"
                 className="bg-white text-black text-md px-4 py-1.5 rounded-md shadow-sm hover:bg-gray-100 transition"
               >
                 Регистрация
               </Link>
               <Link
-                href="/login"
+                href="/profile"
                 className="bg-white text-black text-md px-4 py-1.5 rounded-md shadow-sm hover:bg-gray-100 transition"
               >
                 Войти
