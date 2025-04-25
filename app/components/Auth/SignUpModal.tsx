@@ -1,6 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRef } from "react";
+import PhoneCodeSelect from "../Form/PhoneCodeSelect";
+import InputSelect from "../Form/InputSelect";
+import { useRouter } from "next/navigation";
+type Country = {
+  code: string;
+  name: string;
+  icon: string;
+};
 
 export default function SignUpModal() {
   const [email, setEmail] = useState("");
@@ -10,12 +19,13 @@ export default function SignUpModal() {
   const [termsAgreed, setTermsAgreed] = useState(true);
   const [privacyAgreed, setPrivacyAgreed] = useState(true);
   const [marketingAgreed, setMarketingAgreed] = useState(true);
+  const router = useRouter();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission logic here
     console.log({
@@ -26,6 +36,25 @@ export default function SignUpModal() {
       privacyAgreed,
       marketingAgreed,
     });
+
+    await fetch("http://localhost:3001/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        router.push("/signin");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   return (
@@ -123,38 +152,7 @@ export default function SignUpModal() {
               </div>
             </div>
           </div>
-          <div className="relative">
-            <div className="absolute -top-2.5 left-3 px-1.5 py-0.5 text-sm text-blue-600 bg-white">
-              Телефон
-            </div>
-            <div className="flex items-center border border-solid border-neutral-200 rounded-lg h-[60px]">
-              <div className="flex gap-2 items-center px-3 py-2 ml-2 border-r border-solid border-r-neutral-200">
-                <div />
-                <div>
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M4.516 7.54801C4.952 7.10201 5.559 7.06701 6.092 7.54801L10 11.295L13.908 7.54801C14.441 7.06701 15.049 7.10201 15.482 7.54801C15.918 7.99301 15.89 8.74501 15.482 9.16301C15.076 9.58101 10.787 13.665 10.787 13.665C10.57 13.888 10.285 14 10 14C9.715 14 9.43 13.888 9.211 13.665C9.211 13.665 4.924 9.58101 4.516 9.16301C4.108 8.74501 4.08 7.99301 4.516 7.54801Z"
-                      fill="#A2B4CB"
-                    ></path>
-                  </svg>
-                </div>
-              </div>
-              <input
-                type="tel"
-                placeholder="+375 (__) ___-__-__"
-                className="px-4 py-0 pl-2.5 w-full text-xl rounded-lg border-[none] h-[60px] text-slate-400 max-sm:text-base"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                required
-              />
-            </div>
-          </div>
+          <InputSelect />
           <div className="flex flex-col gap-9">
             <div className="flex gap-2.5 items-start">
               <div onClick={() => setTermsAgreed(!termsAgreed)}>

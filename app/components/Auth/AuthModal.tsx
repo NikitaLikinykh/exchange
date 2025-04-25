@@ -10,6 +10,7 @@ export default function AuthModal() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -30,7 +31,7 @@ export default function AuthModal() {
         const data = await res.json();
         throw new Error(data.message || "Ошибка входа");
       }
-
+      console.log;
       router.push("/profile");
     } catch (err: any) {
       setError(err.message);
