@@ -19,10 +19,18 @@ export default function SignUpModal() {
   const [termsAgreed, setTermsAgreed] = useState(true);
   const [privacyAgreed, setPrivacyAgreed] = useState(true);
   const [marketingAgreed, setMarketingAgreed] = useState(true);
+  const [emailError, setEmailError] = useState(false);
   const router = useRouter();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEmail(value);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setEmailError(!emailRegex.test(value));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -74,9 +82,11 @@ export default function SignUpModal() {
             <input
               type="email"
               placeholder="yourmail@mail.com"
-              className="px-4 py-0 w-full text-xl rounded-lg border border-solid border-neutral-200 h-[60px] text-slate-400 max-sm:text-base"
+              className={`px-4 py-0 w-full text-xl rounded-lg border border-solid h-[60px] text-slate-400 max-sm:text-base ${
+                emailError ? "border-red-500" : "border-neutral-200"
+              }`}
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleEmailChange}
               required
             />
           </div>
