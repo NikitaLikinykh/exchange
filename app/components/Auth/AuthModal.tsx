@@ -9,6 +9,7 @@ export default function AuthModal() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState(false); // Add state for email error
   const router = useRouter();
 
   const togglePasswordVisibility = () => {
@@ -18,6 +19,7 @@ export default function AuthModal() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setEmailError(false); // Reset email error
 
     try {
       const res = await fetch("/api/auth/login", {
@@ -26,12 +28,12 @@ export default function AuthModal() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-      console.log(res);
       if (!res.ok) {
         const data = await res.json();
-        throw new Error(data.message || "Ошибка входа");
+        setEmailError(true); // Highlight email input
+        setError(data.message || "Ошибка входа"); // Set error message
+        return;
       }
-      console.log;
       router.push("/profile");
     } catch (err: any) {
       setError(err.message);
@@ -50,7 +52,9 @@ export default function AuthModal() {
               <input
                 type="email"
                 placeholder="yourmail@mail.com"
-                className="p-3 w-full text-xl rounded-lg border border-solid border-neutral-200 h-[60px] text-slate-400 max-sm:text-base"
+                className={`p-3 w-full text-xl rounded-lg border border-solid h-[60px] text-slate-400 max-sm:text-base ${
+                  emailError ? "border-red-500" : "border-neutral-200"
+                }`} // Highlight email input if error
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -58,6 +62,10 @@ export default function AuthModal() {
               <div className="absolute -top-2.5 left-3 px-1.5 py-0.5 text-xs leading-5 text-blue-600 bg-white">
                 Email
               </div>
+              {emailError &&
+                error && ( // Display error message
+                  <div className="text-red-500 text-sm mt-1">{error}</div>
+                )}
             </div>
           </div>
           <div className="relative mb-2">
