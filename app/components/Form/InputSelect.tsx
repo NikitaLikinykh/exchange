@@ -6,8 +6,9 @@ import PhoneCodeSelect from "./PhoneCodeSelect";
 
 interface InputSelectProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  className?: string;
 }
-export default function InputSelect({ onChange }: InputSelectProps) {
+export default function InputSelect({ onChange, className }: InputSelectProps) {
   const [number, setNumber] = useState("");
   const [rawNumber, setRawNumber] = useState(""); // New state for raw digits
   const fiatCurrencies = [
@@ -70,7 +71,9 @@ export default function InputSelect({ onChange }: InputSelectProps) {
   }, [sellCurrency]);
 
   return (
-    <div className="flex items-center border border-gray-200 rounded-lg p-1 py-2 relative">
+    <div
+      className={`flex items-center border border-gray-200 rounded-lg p-1 py-2 relative ${className}`}
+    >
       <PhoneCodeSelect
         selected={sellCurrency}
         options={fiatCurrencies}

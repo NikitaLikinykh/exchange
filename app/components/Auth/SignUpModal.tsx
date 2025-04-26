@@ -20,6 +20,8 @@ export default function SignUpModal() {
   const [privacyAgreed, setPrivacyAgreed] = useState(true);
   const [marketingAgreed, setMarketingAgreed] = useState(true);
   const [emailError, setEmailError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(""); // Add state for error message
+  const [phoneError, setPhoneError] = useState(false); // Add state for phone error
   const router = useRouter();
 
   const togglePasswordVisibility = () => {
@@ -38,15 +40,12 @@ export default function SignUpModal() {
     // Remove non-numeric characters from phone
     const sanitizedPhone = phone.replace(/\D/g, "");
 
-    console.log({
-      email,
-      password,
-      phone: sanitizedPhone,
-      termsAgreed,
-      privacyAgreed,
-      marketingAgreed,
-    });
+    if (!sanitizedPhone) {
+      setPhoneError(true); // Highlight phone input
+      return;
+    }
 
+    setPhoneError(false); // Reset phone error if valid
     await fetch("http://localhost:3001/auth/register", {
       method: "POST",
       headers: {
@@ -60,7 +59,11 @@ export default function SignUpModal() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success:", data);
+        if (data.error) {
+          setEmailError(true); // Highlight email input
+          setErrorMessage(data.message); // Set error message
+          return;
+        }
         router.push("/signin");
       })
       .catch((error) => {
@@ -92,6 +95,10 @@ export default function SignUpModal() {
               onChange={handleEmailChange}
               required
             />
+            {emailError &&
+              errorMessage && ( // Display error message
+                <div className="text-red-500 text-sm mt-1">{errorMessage}</div>
+              )}
           </div>
           <div className="relative">
             <div className="absolute -top-2.5 left-3 px-1.5 py-0.5 text-sm text-blue-600 bg-white">
@@ -165,7 +172,17 @@ export default function SignUpModal() {
               </div>
             </div>
           </div>
-          <InputSelect onChange={(ev) => setPhone(ev.target.value)} />
+          <InputSelect
+            onChange={(ev) => setPhone(ev.target.value)}
+            className={`${
+              phoneError ? "border-red-500" : "border-neutral-200"
+            }`} // Highlight phone input if error
+          />
+          {phoneError && ( // Display phone error message
+            <div className="text-red-500 text-sm mt-1">
+              Телефон обязателен для ввода
+            </div>
+          )}
           <div className="flex flex-col gap-9">
             <div className="flex gap-2.5 items-start">
               <div onClick={() => setTermsAgreed(!termsAgreed)}>
