@@ -3,8 +3,13 @@ import CurrencySelect from "../Exchange/CurrencySelect";
 
 import { useState } from "react";
 import PhoneCodeSelect from "./PhoneCodeSelect";
-export default function InputSelect() {
+
+interface InputSelectProps {
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+export default function InputSelect({ onChange }: InputSelectProps) {
   const [number, setNumber] = useState("");
+  const [rawNumber, setRawNumber] = useState(""); // New state for raw digits
   const fiatCurrencies = [
     {
       code: "+380",
@@ -53,7 +58,9 @@ export default function InputSelect() {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
-    setNumber(formatPhoneNumber(inputValue));
+    const digits = inputValue.replace(/\D/g, ""); // Extract raw digits
+    setRawNumber(digits); // Store raw digits
+    setNumber(formatPhoneNumber(inputValue)); // Store formatted number
   };
 
   useEffect(() => {
@@ -77,6 +84,7 @@ export default function InputSelect() {
         value={number}
         onChange={handleInputChange}
         className="flex-1 text-lg font-bold outline-none px-2"
+        onInput={onChange}
       />
     </div>
   );

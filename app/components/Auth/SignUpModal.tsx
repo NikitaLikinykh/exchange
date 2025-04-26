@@ -35,11 +35,13 @@ export default function SignUpModal() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic here
+    // Remove non-numeric characters from phone
+    const sanitizedPhone = phone.replace(/\D/g, "");
+
     console.log({
       email,
       password,
-      phone,
+      phone: sanitizedPhone,
       termsAgreed,
       privacyAgreed,
       marketingAgreed,
@@ -53,6 +55,7 @@ export default function SignUpModal() {
       body: JSON.stringify({
         email,
         password,
+        phone: sanitizedPhone,
       }),
     })
       .then((response) => response.json())
@@ -162,7 +165,7 @@ export default function SignUpModal() {
               </div>
             </div>
           </div>
-          <InputSelect />
+          <InputSelect onChange={(ev) => setPhone(ev.target.value)} />
           <div className="flex flex-col gap-9">
             <div className="flex gap-2.5 items-start">
               <div onClick={() => setTermsAgreed(!termsAgreed)}>
