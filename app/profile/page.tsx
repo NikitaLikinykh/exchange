@@ -22,7 +22,7 @@ export default async function Page() {
     }
 
     const user = await res.json();
-    console.log("user>>>>", user);
+
     return <ProfilePage user={user} />;
   } catch (error) {
     console.error("Ошибка при запросе:", error);

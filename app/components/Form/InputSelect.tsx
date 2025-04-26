@@ -65,7 +65,6 @@ export default function InputSelect({ onChange, className }: InputSelectProps) {
   };
 
   useEffect(() => {
-    console.log("sellCurrency", sellCurrency);
     setNumber(`(${sellCurrency.code}) `); // Format code with parentheses
     inp.current?.focus();
   }, [sellCurrency]);

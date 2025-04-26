@@ -29,7 +29,6 @@ export default async function RootLayout({
   // const [isAuth, setIsAuth] = useAuth();
   const cookieStore = cookies();
   const cookieHeader = await cookieStore;
-  console.log("cookieHeader", cookieHeader);
 
   let token = null;
   for (const [key, cookie] of cookieHeader) {

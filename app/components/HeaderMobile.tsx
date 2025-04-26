@@ -1,9 +1,26 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { useAuth } from "../AuthContext";
+import { useRouter } from "next/navigation";
 
 export default function HeaderMobile() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const { isAuth, setIsAuth } = useAuth();
+  const router = useRouter();
+  const handleLogout = async () => {
+    await fetch("/api/auth/logout", {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+    }).then((res) => {
+      if (res.ok) {
+        setIsAuth(false);
+        setIsMenuOpen(false);
+        router.push("/");
+      }
+    });
+    // Здесь ты можешь отправить запрос на logout и сделать редирект
+  };
   return (
     <header className="w-full bg-[#0069FF]">
       <div className="flex items-center justify-between p-4">
@@ -91,20 +108,32 @@ export default function HeaderMobile() {
             >
               Поддержка
             </Link>
-            <Link
-              href="#"
-              className="block font-bold"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Регистрация
-            </Link>
-            <Link
-              href="/profile"
-              className="block font-bold"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Войти
-            </Link>
+            {!isAuth ? (
+              <div>
+                <Link
+                  href="/signup"
+                  className="block font-bold"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Регистрация
+                </Link>
+                <Link
+                  href="/signin"
+                  className="block font-bold"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Войти
+                </Link>
+              </div>
+            ) : (
+              <button
+                type="button"
+                className="font-bold"
+                onClick={handleLogout}
+              >
+                Выйти из аккаунта
+              </button>
+            )}
           </div>
         </nav>
       )}

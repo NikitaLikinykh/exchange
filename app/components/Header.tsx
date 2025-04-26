@@ -29,7 +29,6 @@ export default function Header({ auth }: HeaderProps) {
   }, []);
 
   const handleLogout = async () => {
-    console.log("Выход из аккаунта");
     await fetch("/api/auth/logout", {
       method: "POST",
       credentials: "include",

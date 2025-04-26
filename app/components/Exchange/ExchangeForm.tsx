@@ -202,7 +202,6 @@ export default function ExchangeForm() {
           <button
             type="button"
             className="bg-[#0069FF] text-white rounded-lg py-3 px-8 mt-5 text-lg md:mx-auto block max-w-sm w-full cursor-pointer"
-            onClick={() => router.push("/signin")}
           >
             Обменять
           </button>
