@@ -3,15 +3,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import HeaderMobile from "./HeaderMobile";
-
+import { useRouter } from "next/navigation";
 interface HeaderProps {
-  isAuth: string;
+  isAuth: string | null;
 }
 
 export default function Header({ isAuth }: HeaderProps) {
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-
+  const [auth, setAuth] = useState(isAuth);
+  const router = useRouter();
   // Закрытие меню при клике вне
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -23,8 +24,18 @@ export default function Header({ isAuth }: HeaderProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     console.log("Выход из аккаунта");
+    await fetch("/api/auth/logout", {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+    }).then((res) => {
+      if (res.ok) {
+        setAuth(null);
+        router.push("/");
+      }
+    });
     // Здесь ты можешь отправить запрос на logout и сделать редирект
   };
 
@@ -72,7 +83,7 @@ export default function Header({ isAuth }: HeaderProps) {
             </div>
 
             {/* Авторизация */}
-            {isAuth ? (
+            {auth ? (
               <div className="hidden md:flex items-center space-x-4 relative">
                 {/* Кнопка "Обменять" */}
                 <Link
