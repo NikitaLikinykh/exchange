@@ -57,15 +57,15 @@ export default function SignUpModal() {
         phone: sanitizedPhone,
       }),
     })
-      .then((response) => response.json())
       .then((data) => {
-        if (data.error) {
+        if (data.status === 400) {
           setEmailError(true); // Highlight email input
-          setErrorMessage(data.message); // Set error message
+          setErrorMessage("Пользователь с таким EMAIL уже существует"); // Set error message
           return;
         }
         router.push("/signin");
       })
+
       .catch((error) => {
         console.error("Error:", error);
       });

@@ -65,7 +65,7 @@ export default function InputSelect({ onChange, className }: InputSelectProps) {
   };
 
   useEffect(() => {
-    setNumber(`(${sellCurrency.code}) `); // Format code with parentheses
+    setNumber(`(${sellCurrency.code}) ${formatPhoneNumber(rawNumber)}`);
     inp.current?.focus();
   }, [sellCurrency]);
 
@@ -84,9 +84,11 @@ export default function InputSelect({ onChange, className }: InputSelectProps) {
         ref={inp}
         type="text"
         value={number}
-        onChange={handleInputChange}
+        onChange={(e) => {
+          handleInputChange(e);
+          onChange?.(e); // Вызываем внешний onChange, если передан
+        }}
         className="flex-1 text-lg font-bold outline-none px-2"
-        onInput={onChange}
       />
     </div>
   );

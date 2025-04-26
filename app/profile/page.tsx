@@ -3,8 +3,8 @@ import React from "react";
 import ProfilePage from "../components/ProfilePage";
 
 export default async function Page() {
-  const cookieStore = cookies();
-  const cookieHeader = await cookieStore.toString(); // Получаем все куки одной строкой
+  const cookieStore = await cookies();
+  const cookieHeader = cookieStore.toString(); // Получаем все куки одной строкой
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 

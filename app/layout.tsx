@@ -26,18 +26,15 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const [isAuth, setIsAuth] = useAuth();
-  const cookieStore = cookies();
-  const cookieHeader = await cookieStore;
+  const cookieStore = await cookies(); // ✅
 
   let token = null;
-  for (const [key, cookie] of cookieHeader) {
+  for (const [key, cookie] of cookieStore) {
     if (key === "access_token") {
       token = cookie.value || null;
       break;
     }
   }
-  // setIsAuth(token ? true : false);
 
   return (
     <html lang="en">
