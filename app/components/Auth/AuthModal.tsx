@@ -36,7 +36,7 @@ export default function AuthModal() {
         return;
       }
       setIsAuth(true);
-      router.push("/profile");
+      window.location.href = "/profile";
     } catch (err: any) {
       setError(err.message);
     }

@@ -1,19 +1,26 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { isExpired } from "./app/hooks/token";
+
 export function middleware(req: NextRequest) {
-  const token = req.cookies.get("access_token"); // Replace "token" with the actual cookie name
+  const token = req.cookies.get("access_token");
   const expiredData = req.cookies.get("expires_in");
+
   if (!token) {
-    // Redirect to /signin if the token is missing
+    console.log("middleware: No token found");
     return NextResponse.redirect(new URL("/signin", req.url));
   }
 
-  // Allow the request to proceed if the token exists
+  // if (expiredData && isExpired(expiredData)) {
+  //   console.log("middleware: Token expired");
+  //   return NextResponse.redirect(new URL("/signin", req.url));
+  // }
+
+  console.log("middleware: Token is valid");
   return NextResponse.next();
 }
 
 // Apply middleware to the profile page
 export const config = {
-  matcher: "/profile/:path*", // Adjust the path if necessary
+  matcher: "/profile/:path*",
 };
