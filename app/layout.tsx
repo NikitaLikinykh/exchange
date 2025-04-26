@@ -4,6 +4,8 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { cookies } from "next/headers";
+import { AuthProvider, useAuth } from "./AuthContext";
+
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -24,6 +26,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // const [isAuth, setIsAuth] = useAuth();
   const cookieStore = cookies();
   const cookieHeader = await cookieStore;
   console.log("cookieHeader", cookieHeader);
@@ -35,13 +38,16 @@ export default async function RootLayout({
       break;
     }
   }
+  // setIsAuth(token ? true : false);
 
   return (
     <html lang="en">
       <body className={`${inter.variable} ${geistMono.variable} antialiased`}>
-        <Header isAuth={token} />
-        {children}
-        <Footer />
+        <AuthProvider>
+          <Header auth={token} />
+          {children}
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import axiosInstance from "@/app/lib/axios";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/app/AuthContext";
 
 export default function AuthModal() {
   const [email, setEmail] = useState("");
@@ -11,7 +12,7 @@ export default function AuthModal() {
   const [error, setError] = useState<string | null>(null);
   const [emailError, setEmailError] = useState(false); // Add state for email error
   const router = useRouter();
-
+  const { isAuth, setIsAuth } = useAuth();
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -34,6 +35,7 @@ export default function AuthModal() {
         setError(data.message || "Ошибка входа"); // Set error message
         return;
       }
+      setIsAuth(true);
       router.push("/profile");
     } catch (err: any) {
       setError(err.message);

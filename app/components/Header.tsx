@@ -4,17 +4,21 @@ import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import HeaderMobile from "./HeaderMobile";
 import { useRouter } from "next/navigation";
-interface HeaderProps {
-  isAuth: string | null;
-}
+import { useAuth } from "../AuthContext";
 
-export default function Header({ isAuth }: HeaderProps) {
+interface HeaderProps {
+  auth: string | null;
+}
+export default function Header({ auth }: HeaderProps) {
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-  const [auth, setAuth] = useState(isAuth);
+  const aut = auth !== null ? true : false;
   const router = useRouter();
+  const { isAuth, setIsAuth } = useAuth();
+
   // Закрытие меню при клике вне
   useEffect(() => {
+    setIsAuth(aut);
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setIsAccountMenuOpen(false);
@@ -32,7 +36,7 @@ export default function Header({ isAuth }: HeaderProps) {
       headers: { "Content-Type": "application/json" },
     }).then((res) => {
       if (res.ok) {
-        setAuth(null);
+        setIsAuth(false);
         router.push("/");
       }
     });
@@ -83,7 +87,7 @@ export default function Header({ isAuth }: HeaderProps) {
             </div>
 
             {/* Авторизация */}
-            {auth ? (
+            {isAuth ? (
               <div className="hidden md:flex items-center space-x-4 relative">
                 {/* Кнопка "Обменять" */}
                 <Link
