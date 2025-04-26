@@ -5,12 +5,15 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    const backendRes = await fetch("http://localhost:3001/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-      credentials: "include", // Важно: обязательно include, чтобы проксировать cookies
-    });
+    const backendRes = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+        credentials: "include", // Важно: обязательно include, чтобы проксировать cookies
+      }
+    );
 
     const text = await backendRes.text();
 

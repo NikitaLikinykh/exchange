@@ -3,11 +3,14 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST() {
   try {
-    const backendRes = await fetch("http://localhost:3001/auth/logout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include", // Важно: обязательно include, чтобы проксировать cookies
-    });
+    const backendRes = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/logout`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include", // Важно: обязательно include, чтобы проксировать cookies
+      }
+    );
 
     const text = await backendRes.text();
 
