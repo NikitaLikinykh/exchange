@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 export default function Footer() {
@@ -44,7 +45,9 @@ export default function Footer() {
           </h2>
 
           <button className="flex items-center bg-[#0069FF] text-white rounded-lg mt-12 md:mt-10 overflow-hidden cursor-pointer">
-            <span className="px-6 py-4 text-xl">Сообщение в Whitebird</span>
+            <Link href="/support" className="px-6 py-4 text-xl">
+              Сообщение в Whitebird
+            </Link>
             <div className="w-13 h-13 flex items-center justify-center">
               <img src="/bird.svg" alt="Message" />
             </div>

@@ -72,7 +72,7 @@ export default function MediaPage() {
         </div>
       </div>
 
-      <div className="grid gap-20 p-24 bg-white grid-cols-[repeat(3,1fr)] max-md:gap-10 max-md:p-10 max-md:grid-cols-[repeat(2,1fr)] max-sm:gap-8 max-sm:p-4 max-sm:grid-cols-[1fr]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-4 bg-white sm:gap-10 sm:p-10 lg:gap-20 lg:p-24">
         {newsData.map((news) => (
           <MediaItem
             key={news.id}

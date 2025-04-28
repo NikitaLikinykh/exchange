@@ -12,7 +12,7 @@ export default function MediaItem({
   date: string;
 }) {
   return (
-    <div className="w-[518px] max-sm:w-full">
+    <div className="max-w-[515px] max-sm:w-full">
       <img
         src={image}
         className="object-cover w-full rounded-xl h-[259px]"
