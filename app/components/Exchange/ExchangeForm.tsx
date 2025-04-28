@@ -71,6 +71,7 @@ export default function ExchangeForm() {
   const [sellCurrency, setSellCurrency] = useState(fiatCurrencies[0]);
   const [receiveCurrency, setReceiveCurrency] = useState(cryptoCurrencies[0]);
   const [exchangeRate, setExchangeRate] = useState(0);
+  const [editingField, setEditingField] = useState<"sell" | "receive">("sell"); // Track which field is being edited
 
   // Получение курса обмена с CoinGecko
   useEffect(() => {
@@ -94,16 +95,28 @@ export default function ExchangeForm() {
     fetchExchangeRate();
   }, [sellCurrency, receiveCurrency]);
 
-  // Пересчёт суммы
+  // Update amounts based on the editing field
   useEffect(() => {
-    const amount = parseFloat(sellAmount.replace(/[^0-9.]/g, ""));
+    const amount =
+      editingField === "sell"
+        ? parseFloat(sellAmount.replace(/[^0-9.]/g, ""))
+        : parseFloat(receiveAmount.replace(/[^0-9.]/g, ""));
     if (!isNaN(amount) && exchangeRate > 0) {
-      const result = (amount / exchangeRate).toFixed(6);
-      setReceiveAmount(result);
+      if (editingField === "sell") {
+        const result = (amount / exchangeRate).toFixed(6);
+        setReceiveAmount(result);
+      } else {
+        const result = (amount * exchangeRate).toFixed(6);
+        setSellAmount(result);
+      }
     } else {
-      setReceiveAmount("0");
+      if (editingField === "sell") {
+        setReceiveAmount("0");
+      } else {
+        setSellAmount("0");
+      }
     }
-  }, [sellAmount, exchangeRate]);
+  }, [sellAmount, receiveAmount, exchangeRate, editingField]);
 
   // 👇 Маппер названий криптовалют CoinGecko
   const mapToGeckoId = (code: string) => {
@@ -147,7 +160,10 @@ export default function ExchangeForm() {
                 <input
                   type="text"
                   value={sellAmount}
-                  onChange={(e) => setSellAmount(e.target.value)}
+                  onChange={(e) => {
+                    setSellAmount(e.target.value);
+                    setEditingField("sell");
+                  }}
                   className="flex-1 text-lg font-bold outline-none"
                 />
                 <div className="absolute right-3">
@@ -161,7 +177,15 @@ export default function ExchangeForm() {
             </div>
 
             {/* Exchange icon */}
-            <div className="flex items-center justify-center relative top-0 md:top-4">
+            <div
+              className="flex items-center justify-center relative top-0 md:top-4 cursor-pointer"
+              onClick={() => {
+                const temp = sellCurrency;
+                setSellCurrency(receiveCurrency);
+                setReceiveCurrency(temp);
+                setExchangeRate(0); // Reset exchange rate to fetch new one
+              }}
+            >
               <img src="/exchange.svg" alt="Exchange" className="w-5 h-6" />
             </div>
 
@@ -174,7 +198,10 @@ export default function ExchangeForm() {
                 <input
                   type="text"
                   value={receiveAmount}
-                  readOnly
+                  onChange={(e) => {
+                    setReceiveAmount(e.target.value);
+                    setEditingField("receive");
+                  }}
                   className="flex-1 text-lg font-bold text-[#8f9db1] outline-none"
                 />
                 <div className="absolute right-3">
