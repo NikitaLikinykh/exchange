@@ -99,7 +99,7 @@ export default function ProfilePage({ user }: ProfilePageProps) {
       {activeTab === "notifications" && (
         <div className="bg-white p-4 ">
           <div className="max-w-[400px] w-full mx-auto flex flex-col gap-8">
-            <p className="text-2xl font-bold text-center">Уведомление</p>
+            <p className="text-2xl font-bold text-center">Нет уведомлений</p>
           </div>
         </div>
       )}
@@ -107,7 +107,7 @@ export default function ProfilePage({ user }: ProfilePageProps) {
         <div className="bg-white p-4 ">
           <div className="max-w-[400px] w-full mx-auto flex flex-col gap-8">
             <p className="text-2xl font-bold text-center">
-              Реферальная программа
+              Операции не найдены
             </p>
             {/* Add referral program content here */}
           </div>
