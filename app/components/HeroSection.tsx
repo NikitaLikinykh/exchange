@@ -6,16 +6,6 @@ import ExchangeForm from "./Exchange/ExchangeForm";
 export default function HeroSection() {
   return (
     <section className="bg-[#0069FF] pb-16 relative">
-      {/* Wave decoration at the top */}
-      <div className="w-full">
-        <img
-          src="/wave-decoration.svg"
-          alt=""
-          className="w-full object-contain"
-          aria-hidden="true"
-        />
-      </div>
-
       {/* Hero content */}
       <div className="container mx-auto px-5 sm:px-20 text-center text-white pb-6">
         <h1 className="text-4xl md:text-6xl font-bold leading-tight tracking-wide">

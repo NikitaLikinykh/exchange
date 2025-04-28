@@ -80,12 +80,12 @@ export default function Footer() {
             ))}
           </div>
           <div className="w-full mt-8 overflow-hidden">
-            <img
+            {/* <img
               src="/divider.svg"
               alt=""
               className="w-full"
               aria-hidden="true"
-            />
+            /> */}
           </div>
 
           <div className="w-full mt-8 grid grid-cols-1 md:grid-cols-4 gap-10">
@@ -100,13 +100,13 @@ export default function Footer() {
                 <p className="mt-10">Контактная информация:</p>
                 <p className="mt-2">info@whitebird.io</p>
                 <p className="mt-16">© 2020–2025 Whitebird</p>
-                <div className="mt-8">
+                {/* <div className="mt-8">
                   <img
                     src="/payment-methods.svg"
                     alt="Payment methods"
                     className="w-full"
                   />
-                </div>
+                </div> */}
               </div>
             </div>
 
