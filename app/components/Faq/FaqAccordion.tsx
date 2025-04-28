@@ -30,14 +30,14 @@ const FaqAccordion: React.FC<FaqAccordionProps> = ({ categories }) => {
   };
 
   return (
-    <div className="box-border flex flex-col gap-12 py-6 m-0 px-[485px] max-md:px-5 max-md:py-6 max-sm:p-4">
+    <div className="container mx-auto px-6 box-border flex flex-col gap-12 py-6 m-0 max-md:px-5 max-md:py-6 max-sm:p-4">
       <div className="box-border p-0 m-0 mb-6 text-6xl font-semibold text-center text-white max-md:text-5xl max-sm:text-3xl">
         Вопросы - ответы
       </div>
 
       {categories.map((category, index) => (
-        <div key={index} className="box-border flex flex-col gap-5 p-0 m-0">
-          <div className="box-border p-0 m-0 mb-5 text-3xl text-white">
+        <div key={index} className="box-border flex flex-col gap-5 p-0 m-0 ">
+          <div className="box-border p-0 m-0 mb-5 text-3xl text-white ">
             {category.title}
           </div>
 

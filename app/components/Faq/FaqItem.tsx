@@ -15,7 +15,7 @@ const FaqItem: React.FC<FaqItemProps> = ({
   children,
 }) => {
   return (
-    <div className="box-border m-0 bg-white rounded-xl border-b border-solid border-b-slate-100">
+    <div className="box-border m-0 bg-white rounded-xl border-b border-solid border-b-slate-100 max-w-[850px]">
       <div
         className="box-border flex justify-between items-center p-6 cursor-pointer max-sm:p-4"
         onClick={onToggle}
