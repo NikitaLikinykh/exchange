@@ -178,7 +178,7 @@ export default function ExchangeForm() {
 
             {/* Exchange icon */}
             <div
-              className="flex items-center justify-center relative top-0 md:top-4 cursor-pointer"
+              className="flex items-center justify-center relative top-0 md:top-4"
               onClick={() => {
                 const temp = sellCurrency;
                 setSellCurrency(receiveCurrency);
@@ -202,6 +202,7 @@ export default function ExchangeForm() {
                     setReceiveAmount(e.target.value);
                     setEditingField("receive");
                   }}
+                  readOnly={true}
                   className="flex-1 text-lg font-bold text-[#8f9db1] outline-none"
                 />
                 <div className="absolute right-3">

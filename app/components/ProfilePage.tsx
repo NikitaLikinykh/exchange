@@ -78,26 +78,37 @@ export default function ProfilePage({ user }: ProfilePageProps) {
               onChange={(ev) => setEmail(ev.target.value)}
             />
             <InputSelect />
+            <p className="text-2xl font-bold">Изменить пароль</p>
+            <InputPassword
+              label="Старый пароль"
+              value={oldPassword}
+              onChange={(ev) => {
+                setOldPassword(ev.target.value);
+              }}
+            />
+            <InputPassword
+              label="Новый пароль"
+              value={newPassword}
+              onChange={(ev) => {
+                setNewPassword(ev.target.value);
+              }}
+            />
           </div>
         </div>
       )}
       {activeTab === "notifications" && (
         <div className="bg-white p-4 ">
           <div className="max-w-[400px] w-full mx-auto flex flex-col gap-8">
-            <p className="text-2xl font-bold">Уведомление</p>
-            <div className="flex justify-between">
-              <p className="text-lg font-light">
-                Получать уведомления на Email
-              </p>
-              <Switch />
-            </div>
+            <p className="text-2xl font-bold text-center">Уведомление</p>
           </div>
         </div>
       )}
       {activeTab === "referral" && (
         <div className="bg-white p-4 ">
           <div className="max-w-[400px] w-full mx-auto flex flex-col gap-8">
-            <p className="text-2xl font-bold">Реферальная программа</p>
+            <p className="text-2xl font-bold text-center">
+              Реферальная программа
+            </p>
             {/* Add referral program content here */}
           </div>
         </div>
