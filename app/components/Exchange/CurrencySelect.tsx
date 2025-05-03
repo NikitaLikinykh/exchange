@@ -34,7 +34,7 @@ function CurrencySelect({
         onClick={() => setOpen(!open)}
       >
         <img src={selected.icon} alt={selected.code} className="h-6 w-6" />
-        <span className="ml-1 text-lg font-bold">{selected.code}</span>
+        <span className="ml-1 text-lg font-bold">{selected.name}</span>
         <img
           src="/arrow-bottom.svg"
           alt="Dropdown"
@@ -58,7 +58,7 @@ function CurrencySelect({
                 className="h-7 w-7"
               />
               <div className="flex flex-col">
-                <span className="text-sm font-medium">{currency.code}</span>
+                <span className="text-sm font-medium">{currency.name}</span>
                 {currency.network && (
                   <span className="text-xs text-gray-500">
                     {currency.network}

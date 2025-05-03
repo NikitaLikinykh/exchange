@@ -6,17 +6,17 @@ import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 
 const fiatCurrencies = [
-  { code: "USD", name: "US Dollar", icon: "/currency/usd.svg", network: "" },
-  { code: "EUR", name: "Euro", icon: "/currency/eur.svg", network: "" },
+  { code: "USD", name: "USD", icon: "/currency/usd.svg", network: "" },
+  { code: "EUR", name: "EUR", icon: "/currency/eur.svg", network: "" },
   {
     code: "RUB",
-    name: "Russian Ruble",
+    name: "RUB",
     icon: "/currency/rub.svg",
     network: "",
   },
   {
     code: "BYN",
-    name: "Belarusian Ruble",
+    name: "BYN",
     icon: "/currency/byn.svg",
     network: "",
   },
@@ -25,19 +25,19 @@ const fiatCurrencies = [
 const cryptoCurrencies = [
   {
     code: "BTC",
-    name: "Bitcoin",
+    name: "BTC",
     icon: "/currency/btc.svg",
     network: "Bitcoin",
   },
   {
     code: "ETH",
-    name: "Ethereum",
+    name: "ETH",
     icon: "/currency/ethereum.svg",
     network: "Ethereum",
   },
   {
     code: "USDT",
-    name: "Tether",
+    name: "USDT",
     icon: "/currency/t.svg",
     network: "ERC20",
   },
@@ -45,14 +45,14 @@ const cryptoCurrencies = [
 
   {
     code: "USDT",
-    name: "Tether",
+    name: "USDT",
     icon: "/currency/trx20.svg",
     network: "TRC20",
   },
-  { code: "TON", name: "Toncoin", icon: "/currency/ton.svg", network: "" },
+  { code: "TON", name: "TON", icon: "/currency/ton.svg", network: "" },
   {
-    code: "USD₮",
-    name: "USDT (TON)",
+    code: "USDT",
+    name: "USD₮",
     icon: "/currency/usdton.svg",
     network: "TON",
   },
