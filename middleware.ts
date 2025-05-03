@@ -4,17 +4,18 @@ import { isExpired } from "./app/hooks/token";
 
 export function middleware(req: NextRequest) {
   const token = req.cookies.get("access_token");
-  const expiredData = req.cookies.get("expires_in");
-
+  const isAdmin = req.cookies.get("isAdmin");
+  const url = req.nextUrl.pathname;
+  console.log(isAdmin.value);
   if (!token) {
     console.log("middleware: No token found");
     return NextResponse.redirect(new URL("/signin", req.url));
   }
 
-  // if (expiredData && isExpired(expiredData)) {
-  //   console.log("middleware: Token expired");
-  //   return NextResponse.redirect(new URL("/signin", req.url));
-  // }
+  if (url.startsWith("/admin") && isAdmin.value !== "true") {
+    console.log("middleware: User is not an admin", typeof isAdmin?.value);
+    return NextResponse.redirect(new URL("/signin", req.url));
+  }
 
   console.log("middleware: Token is valid");
   return NextResponse.next();
@@ -22,5 +23,5 @@ export function middleware(req: NextRequest) {
 
 // Apply middleware to the profile page
 export const config = {
-  matcher: "/profile/:path*",
+  matcher: ["/profile/:path*", "/admin/:path*"],
 };

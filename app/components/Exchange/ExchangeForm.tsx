@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import CurrencySelect from "./CurrencySelect";
+
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 
 const fiatCurrencies = [
   { code: "USD", name: "US Dollar", icon: "/currency/usd.svg", network: "" },
@@ -72,7 +73,9 @@ export default function ExchangeForm() {
   const [receiveCurrency, setReceiveCurrency] = useState(cryptoCurrencies[0]);
   const [exchangeRate, setExchangeRate] = useState(0);
   const [editingField, setEditingField] = useState<"sell" | "receive">("sell"); // Track which field is being edited
-
+  const CurrencySelect = dynamic(() => import("./CurrencySelect"), {
+    ssr: false,
+  });
   // Получение курса обмена с CoinGecko
   useEffect(() => {
     const fetchExchangeRate = async () => {
