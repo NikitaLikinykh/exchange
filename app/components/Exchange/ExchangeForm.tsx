@@ -129,20 +129,20 @@ export default function ExchangeForm() {
     const calculateFees = () => {
       const sellAmountNumber = parseFloat(sellAmount.replace(/[^0-9.]/g, ""));
       if (!isNaN(sellAmountNumber)) {
-        // Комиссия сервиса: 2.439% от суммы, минимум 20 USD
-        const calculatedServiceFee = Math.max(sellAmountNumber * 0.02439, 20);
+        // Комиссия сервиса: 2.439% от суммы, минимум 0.02 USD
+        const calculatedServiceFee = Math.max(sellAmountNumber * 0.02439, 0.02);
         setServiceFee(parseFloat(calculatedServiceFee.toFixed(2)));
 
-        // Комиссия сети блокчейн: зависит от суммы и типа валюты
+        // Комиссия сети блокчейн: фиксированная для минимальных сумм, иначе процент
         let calculatedNetworkFee = 0;
         if (sellCurrency.code === "BTC") {
-          calculatedNetworkFee = Math.max(sellAmountNumber * 0.0005, 0.5); // 0.05% или минимум 0.5 USD
+          calculatedNetworkFee = Math.max(sellAmountNumber * 0.00045, 0.45); // 0.045% или минимум 0.45 USD
         } else if (sellCurrency.code === "ETH") {
-          calculatedNetworkFee = Math.max(sellAmountNumber * 0.001, 1); // 0.1% или минимум 1 USD
+          calculatedNetworkFee = Math.max(sellAmountNumber * 0.0009, 0.45); // 0.09% или минимум 0.45 USD
         } else if (sellCurrency.code === "USDT") {
           calculatedNetworkFee = Math.max(sellAmountNumber * 0.0002, 0.2); // 0.02% или минимум 0.2 USD
         } else {
-          calculatedNetworkFee = 1; // Фиксированная комиссия для остальных валют
+          calculatedNetworkFee = 0.45; // Фиксированная комиссия для остальных валют
         }
         setNetworkFee(parseFloat(calculatedNetworkFee.toFixed(2)));
       } else {
