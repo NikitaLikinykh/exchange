@@ -76,18 +76,18 @@ export default function ExchangeForm() {
   const CurrencySelect = dynamic(() => import("./CurrencySelect"), {
     ssr: false,
   });
-  // Получение курса обмена с CoinGecko
+  // Получение курса обмена с CryptoCompare
   useEffect(() => {
     const fetchExchangeRate = async () => {
       try {
-        const from = receiveCurrency.code.toLowerCase(); // крипта
-        const to = sellCurrency.code.toLowerCase(); // фиат
+        const apiKey =
+          "83f44553b097e0cfe397f852ea167ce1c7082d692fb61c36ac079e47043cb177"; // Замените на ваш API-ключ
+        const from = receiveCurrency.code; // крипта
+        const to = sellCurrency.code; // фиат
         const res = await axios.get(
-          `https://api.coingecko.com/api/v3/simple/price?ids=${mapToGeckoId(
-            from
-          )}&vs_currencies=${to}`
+          `https://min-api.cryptocompare.com/data/price?fsym=${from}&tsyms=${to}&api_key=${apiKey}`
         );
-        const rate = res.data[mapToGeckoId(from)][to];
+        const rate = res.data[to];
         setExchangeRate(rate);
       } catch (error) {
         console.error("Ошибка при получении курса:", error);
@@ -129,6 +129,8 @@ export default function ExchangeForm() {
       trx: "tron",
       usdt: "tether",
       ton: "the-open-network",
+      rub: "russian-ruble", // Добавлено для RUB
+      byn: "belarusian-ruble", // Добавлено для BYN
     };
     return mapping[code] || code;
   };
