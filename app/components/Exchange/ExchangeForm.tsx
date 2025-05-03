@@ -168,6 +168,24 @@ export default function ExchangeForm() {
     return mapping[code] || code;
   };
 
+  // Проверка и замена фиата на криптовалюту
+  useEffect(() => {
+    const handleFiatToCrypto = () => {
+      if (
+        fiatCurrencies.some((fiat) => fiat.code === sellCurrency.code) &&
+        fiatCurrencies.some((fiat) => fiat.code === receiveCurrency.code)
+      ) {
+        // Если обе валюты фиатные, меняем receiveCurrency на USDT
+        setReceiveCurrency(
+          cryptoCurrencies.find((crypto) => crypto.code === "USDT") ||
+            cryptoCurrencies[0]
+        );
+      }
+    };
+
+    handleFiatToCrypto();
+  }, [sellCurrency, receiveCurrency]);
+
   return (
     <div className="max-w-[1300px] w-full mx-auto px-5 sm:px-10 md:px-20 relative z-10">
       <p className="text-[#9cc3ff] pb-1">
