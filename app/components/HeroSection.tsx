@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 import ExchangeForm from "./Exchange/ExchangeForm";
 
-export default function HeroSection({ token }: string | undefined) {
+export default function HeroSection() {
   return (
     <section className="bg-[#0069FF] pb-16 relative">
       {/* Hero content */}
@@ -16,7 +16,7 @@ export default function HeroSection({ token }: string | undefined) {
         </p>
       </div>
 
-      <ExchangeForm token={token} />
+      <ExchangeForm />
 
       {/* Partners banner */}
       <div className="max-w-[1300px] w-full mx-auto px-5 sm:px-20 mt-32">

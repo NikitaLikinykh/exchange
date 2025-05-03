@@ -3,6 +3,7 @@ import Image from "next/image";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
+import { useAuth } from "@/app/AuthContext";
 
 const fiatCurrencies = [
   { code: "USD", name: "USD", icon: "/currency/usd.svg", network: "" },
@@ -63,7 +64,8 @@ const cryptoCurrencies = [
   // },
 ];
 
-export default function ExchangeForm({ token }: string | undefined) {
+export default function ExchangeForm() {
+  const { isAuth } = useAuth();
   const router = useRouter();
   const [sellAmount, setSellAmount] = useState("1000");
   const [receiveAmount, setReceiveAmount] = useState("");
@@ -186,35 +188,39 @@ export default function ExchangeForm({ token }: string | undefined) {
   }, [sellCurrency, receiveCurrency]);
 
   const handleExchange = async () => {
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include", // обязательно, чтобы передавались cookie
-        body: JSON.stringify({
-          sellAmount, // Сумма, которую пользователь хочет продать
-          receiveAmount, // Сумма, которую пользователь получит
-          sellCurrency, // Валюта, которую пользователь продает
-          receiveCurrency, // Валюта, которую пользователь получает
-          exchangeRate, // Текущий курс обмена между валютами
-          serviceFee, // Комиссия сервиса за обмен
-          networkFee, // Комиссия сети блокчейн
-        }),
-      });
+    if (isAuth) {
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include", // обязательно, чтобы передавались cookie
+          body: JSON.stringify({
+            sellAmount, // Сумма, которую пользователь хочет продать
+            receiveAmount, // Сумма, которую пользователь получит
+            sellCurrency, // Валюта, которую пользователь продает
+            receiveCurrency, // Валюта, которую пользователь получает
+            exchangeRate, // Текущий курс обмена между валютами
+            serviceFee, // Комиссия сервиса за обмен
+            networkFee, // Комиссия сети блокчейн
+          }),
+        });
 
-      if (!res.ok) {
-        const error = await res.json();
-        console.error("Ошибка при создании ордера:", error);
-        return;
+        if (!res.ok) {
+          const error = await res.json();
+          console.error("Ошибка при создании ордера:", error);
+          return;
+        }
+
+        const data = await res.json();
+        console.log("Ордер создан:", data);
+        router.push("/exchange"); // или другой маршрут
+      } catch (err) {
+        console.error("Ошибка запроса:", err);
       }
-
-      const data = await res.json();
-      console.log("Ордер создан:", data);
-      router.push("/exchange"); // или другой маршрут
-    } catch (err) {
-      console.error("Ошибка запроса:", err);
+    } else {
+      router.push("/signin");
     }
   };
 

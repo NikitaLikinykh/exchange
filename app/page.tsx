@@ -4,14 +4,11 @@ import LegalSection from "./components/LegalSection";
 import FeatureSection from "./components/FeatureSection";
 import FaqSection from "./components/FaqSection";
 import NewsSection from "./components/NewsSection";
-import { cookies } from "next/headers";
 
 export default async function Home() {
-  const cookiesStore = await cookies();
-  const token = cookiesStore.get("access_token");
   return (
     <main className="min-h-screen font-[family-name:var(--font-geist-sans)]">
-      <HeroSection token={token} />
+      <HeroSection />
 
       <LegalSection />
 
