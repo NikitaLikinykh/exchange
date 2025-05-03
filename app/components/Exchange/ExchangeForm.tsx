@@ -194,13 +194,13 @@ export default function ExchangeForm({ token }: string | undefined) {
         },
         credentials: "include", // обязательно, чтобы передавались cookie
         body: JSON.stringify({
-          sellAmount,
-          receiveAmount,
-          sellCurrency,
-          receiveCurrency,
-          exchangeRate,
-          serviceFee,
-          networkFee,
+          sellAmount, // Сумма, которую пользователь хочет продать
+          receiveAmount, // Сумма, которую пользователь получит
+          sellCurrency, // Валюта, которую пользователь продает
+          receiveCurrency, // Валюта, которую пользователь получает
+          exchangeRate, // Текущий курс обмена между валютами
+          serviceFee, // Комиссия сервиса за обмен
+          networkFee, // Комиссия сети блокчейн
         }),
       });
 
@@ -212,7 +212,7 @@ export default function ExchangeForm({ token }: string | undefined) {
 
       const data = await res.json();
       console.log("Ордер создан:", data);
-      router.push("/exchange/success"); // или другой маршрут
+      router.push("/exchange"); // или другой маршрут
     } catch (err) {
       console.error("Ошибка запроса:", err);
     }
