@@ -76,6 +76,9 @@ export default function ExchangeForm() {
     ssr: false,
   });
 
+  const [serviceFee, setServiceFee] = useState(0); // Комиссия сервиса
+  const [networkFee, setNetworkFee] = useState(0); // Комиссия сети
+
   // Получение курса обмена с CryptoCompare
   useEffect(() => {
     const fetchExchangeRate = async () => {
@@ -120,6 +123,36 @@ export default function ExchangeForm() {
       }
     }
   }, [sellAmount, receiveAmount, exchangeRate, editingField]);
+
+  // Обновление комиссий при изменении суммы
+  useEffect(() => {
+    const calculateFees = () => {
+      const sellAmountNumber = parseFloat(sellAmount.replace(/[^0-9.]/g, ""));
+      if (!isNaN(sellAmountNumber)) {
+        // Комиссия сервиса: 2.439% от суммы, минимум 20 USD
+        const calculatedServiceFee = Math.max(sellAmountNumber * 0.02439, 20);
+        setServiceFee(parseFloat(calculatedServiceFee.toFixed(2)));
+
+        // Комиссия сети блокчейн: зависит от суммы и типа валюты
+        let calculatedNetworkFee = 0;
+        if (sellCurrency.code === "BTC") {
+          calculatedNetworkFee = Math.max(sellAmountNumber * 0.0005, 0.5); // 0.05% или минимум 0.5 USD
+        } else if (sellCurrency.code === "ETH") {
+          calculatedNetworkFee = Math.max(sellAmountNumber * 0.001, 1); // 0.1% или минимум 1 USD
+        } else if (sellCurrency.code === "USDT") {
+          calculatedNetworkFee = Math.max(sellAmountNumber * 0.0002, 0.2); // 0.02% или минимум 0.2 USD
+        } else {
+          calculatedNetworkFee = 1; // Фиксированная комиссия для остальных валют
+        }
+        setNetworkFee(parseFloat(calculatedNetworkFee.toFixed(2)));
+      } else {
+        setServiceFee(0);
+        setNetworkFee(0);
+      }
+    };
+
+    calculateFees();
+  }, [sellAmount, sellCurrency]);
 
   // 👇 Маппер названий криптовалют CoinGecko
   const mapToGeckoId = (code: string) => {
@@ -221,12 +254,12 @@ export default function ExchangeForm() {
           </div>
 
           {/* Fee info */}
-          <div className="flex flex-wrap items-center justify-center text-[#929BA8]  gap-2 text-sm my-7">
+          <div className="flex flex-wrap items-center justify-center text-[#929BA8] gap-2 text-sm my-7">
             <span>Включены:</span>
             <div className="flex items-center gap-2 text-center">
-              <span>Комисcия сервиса 24.36 USD</span>
+              <span>Комисcия сервиса {serviceFee} USD</span>
               <img src="/question.svg" alt="Info" className="h-4 w-4" />
-              <span>Комисcия сети блокчейн 0.06 USD</span>
+              <span>Комисcия сети блокчейн {networkFee} USD</span>
             </div>
           </div>
 
