@@ -52,17 +52,16 @@ const cryptoCurrencies = [
   { code: "TON", name: "Toncoin", icon: "/currency/ton.svg", network: "" },
   {
     code: "USD₮",
-    name: "USDTON",
+    name: "USDT (TON)",
     icon: "/currency/usdton.svg",
     network: "TON",
   },
-
-  {
-    code: "WBP",
-    name: "Toncoin",
-    icon: "/currency/wbtrc.svg",
-    network: "TRC20",
-  },
+  // {
+  //   code: "USDT",
+  //   name: "WBP (TRC20)",
+  //   icon: "/currency/wbtrc.svg",
+  //   network: "TRC20",
+  // },
 ];
 
 export default function ExchangeForm() {
@@ -72,18 +71,19 @@ export default function ExchangeForm() {
   const [sellCurrency, setSellCurrency] = useState(fiatCurrencies[0]);
   const [receiveCurrency, setReceiveCurrency] = useState(cryptoCurrencies[0]);
   const [exchangeRate, setExchangeRate] = useState(0);
-  const [editingField, setEditingField] = useState<"sell" | "receive">("sell"); // Track which field is being edited
+  const [editingField, setEditingField] = useState<"sell" | "receive">("sell");
   const CurrencySelect = dynamic(() => import("./CurrencySelect"), {
     ssr: false,
   });
+
   // Получение курса обмена с CryptoCompare
   useEffect(() => {
     const fetchExchangeRate = async () => {
       try {
         const apiKey =
           "83f44553b097e0cfe397f852ea167ce1c7082d692fb61c36ac079e47043cb177"; // Замените на ваш API-ключ
-        const from = receiveCurrency.code; // крипта
-        const to = sellCurrency.code; // фиат
+        const from = sellCurrency.code; // исходная валюта
+        const to = receiveCurrency.code; // целевая валюта
         const res = await axios.get(
           `https://min-api.cryptocompare.com/data/price?fsym=${from}&tsyms=${to}&api_key=${apiKey}`
         );
@@ -98,7 +98,7 @@ export default function ExchangeForm() {
     fetchExchangeRate();
   }, [sellCurrency, receiveCurrency]);
 
-  // Update amounts based on the editing field
+  // Обновление сумм на основе редактируемого поля
   useEffect(() => {
     const amount =
       editingField === "sell"
@@ -106,10 +106,10 @@ export default function ExchangeForm() {
         : parseFloat(receiveAmount.replace(/[^0-9.]/g, ""));
     if (!isNaN(amount) && exchangeRate > 0) {
       if (editingField === "sell") {
-        const result = (amount / exchangeRate).toFixed(6);
+        const result = (amount * exchangeRate).toFixed(6);
         setReceiveAmount(result);
       } else {
-        const result = (amount * exchangeRate).toFixed(6);
+        const result = (amount / exchangeRate).toFixed(6);
         setSellAmount(result);
       }
     } else {
@@ -143,7 +143,7 @@ export default function ExchangeForm() {
       <div className="bg-white rounded-lg shadow-lg p-5 md:p-5 -mb-20">
         <div className="flex justify-between items-center py-2">
           <div className="text-lg font-medium uppercase">
-            1 {receiveCurrency.code} ≈ {exchangeRate} {sellCurrency.code}
+            1 {sellCurrency.code} ≈ {exchangeRate} {receiveCurrency.code}
           </div>
           <Image
             width={50}
@@ -174,7 +174,7 @@ export default function ExchangeForm() {
                 <div className="absolute right-3">
                   <CurrencySelect
                     selected={sellCurrency}
-                    options={fiatCurrencies}
+                    options={[...fiatCurrencies, ...cryptoCurrencies]} // Оба списка валют
                     onSelect={setSellCurrency}
                   />
                 </div>
@@ -183,12 +183,12 @@ export default function ExchangeForm() {
 
             {/* Exchange icon */}
             <div
-              className="flex items-center justify-center relative top-0 md:top-4"
+              className="flex items-center justify-center relative top-0 md:top-4 cursor-pointer"
               onClick={() => {
-                const temp = sellCurrency;
+                const tempCurrency = sellCurrency;
                 setSellCurrency(receiveCurrency);
-                setReceiveCurrency(temp);
-                setExchangeRate(0); // Reset exchange rate to fetch new one
+                setReceiveCurrency(tempCurrency);
+                setExchangeRate(0); // Сбросить курс для обновления
               }}
             >
               <img src="/exchange.svg" alt="Exchange" className="w-5 h-6" />
@@ -207,13 +207,12 @@ export default function ExchangeForm() {
                     setReceiveAmount(e.target.value);
                     setEditingField("receive");
                   }}
-                  readOnly={true}
-                  className="flex-1 text-lg font-bold text-[#8f9db1] outline-none"
+                  className="flex-1 text-lg font-bold outline-none"
                 />
                 <div className="absolute right-3">
                   <CurrencySelect
                     selected={receiveCurrency}
-                    options={cryptoCurrencies}
+                    options={[...fiatCurrencies, ...cryptoCurrencies]} // Оба списка валют
                     onSelect={setReceiveCurrency}
                   />
                 </div>
