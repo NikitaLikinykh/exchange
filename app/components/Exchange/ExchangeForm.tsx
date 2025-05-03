@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
@@ -64,7 +63,7 @@ const cryptoCurrencies = [
   // },
 ];
 
-export default function ExchangeForm() {
+export default function ExchangeForm({ token }: string | undefined) {
   const router = useRouter();
   const [sellAmount, setSellAmount] = useState("1000");
   const [receiveAmount, setReceiveAmount] = useState("");
@@ -186,6 +185,39 @@ export default function ExchangeForm() {
     handleFiatToCrypto();
   }, [sellCurrency, receiveCurrency]);
 
+  const handleExchange = async () => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // обязательно, чтобы передавались cookie
+        body: JSON.stringify({
+          sellAmount,
+          receiveAmount,
+          sellCurrency,
+          receiveCurrency,
+          exchangeRate,
+          serviceFee,
+          networkFee,
+        }),
+      });
+
+      if (!res.ok) {
+        const error = await res.json();
+        console.error("Ошибка при создании ордера:", error);
+        return;
+      }
+
+      const data = await res.json();
+      console.log("Ордер создан:", data);
+      router.push("/exchange/success"); // или другой маршрут
+    } catch (err) {
+      console.error("Ошибка запроса:", err);
+    }
+  };
+
   return (
     <div className="max-w-[1300px] w-full mx-auto px-5 sm:px-10 md:px-20 relative z-10">
       <p className="text-[#9cc3ff] pb-1">
@@ -285,6 +317,7 @@ export default function ExchangeForm() {
           <button
             type="button"
             className="bg-[#0069FF] text-white rounded-lg py-3 px-8 mt-5 text-lg md:mx-auto block max-w-sm w-full cursor-pointer"
+            onClick={handleExchange}
           >
             Обменять
           </button>
