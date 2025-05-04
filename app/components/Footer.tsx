@@ -54,15 +54,24 @@ export default function Footer() {
           </button>
 
           <div className="flex justify-around gap-8 md:gap-10 lg:gap-80 mt-24 md:mt-32 text-lg text-[#1E1E28] flex-wrap px-4">
-            <a href="#" className="hover:text-[#0069FF] transition-colors">
+            <Link
+              href="/faq"
+              className="hover:text-[#0069FF] transition-colors"
+            >
               Вопросы-ответы
-            </a>
-            <a href="#" className="hover:text-[#0069FF] transition-colors">
+            </Link>
+            <Link
+              href="/media"
+              className="hover:text-[#0069FF] transition-colors"
+            >
               Новости
-            </a>
-            <a href="#" className="hover:text-[#0069FF] transition-colors">
+            </Link>
+            <Link
+              href="/support"
+              className="hover:text-[#0069FF] transition-colors"
+            >
               Поддержка
-            </a>
+            </Link>
           </div>
 
           <div className="flex border-y-1 border-[#dfdfdf] py-8 gap-8 overflow-x-auto lg:overflow-hidden justify-center w-full my-8">
@@ -150,16 +159,61 @@ export default function Footer() {
 
             <div className="md:col-span-1">
               <div className="text-[#8F9DB1] text-base space-y-5">
-                <p>Правила обращения с персональными данными</p>
-                <p>Политика обработки персональных данных</p>
-                <p>Порядок обеспечения конфиденциальности</p>
-                <p>Политика оператора в отношении персональных данных</p>
-                <p>Общие условия реализации токенов</p>
-                <p>Управление конфликтами интересов</p>
-                <p>Уведомление о рисках</p>
-                <p>Публичная оферта</p>
-                <p>Разрешение споров</p>
-                <p>Информация о собраниях участников Общества</p>
+                <p>
+                  <a href="/documents/info/i-7.pdf" download>
+                    Правила обращения с персональными данными
+                  </a>
+                </p>
+                <p>
+                  {" "}
+                  <a href="/documents/info/i-14.pdf" download>
+                    Политика обработки персональных данных
+                  </a>
+                </p>
+                <p>
+                  <a href="/documents/info/i-9.pdf" download>
+                    Порядок обеспечения конфиденциальности
+                  </a>
+                </p>
+                <p>
+                  {" "}
+                  <a href="/documents/info/i-8.pdf" download>
+                    Политика оператора в отношении персональных данных
+                  </a>
+                </p>
+                <p>
+                  {" "}
+                  <a href="/documents/info/i-10.pdf" download>
+                    Общие условия реализации токенов
+                  </a>
+                </p>
+                <p>
+                  <a href="/documents/info/i-11.pdf" download>
+                    Управление конфликтами интересов
+                  </a>
+                </p>
+                <p>
+                  <a href="/documents/info/i-12.pdf" download>
+                    Уведомление о рисках
+                  </a>
+                </p>
+                <p>
+                  {" "}
+                  <a href="/documents/ofert/p-1.pdf" download>
+                    Публичная оферта
+                  </a>
+                </p>
+                <p>
+                  {" "}
+                  <a href="/documents/info/i-9.pdf" download>
+                    Разрешение споров
+                  </a>
+                </p>
+                <p>
+                  <a href="/documents/info/i-10.pdf" download>
+                    Информация о собраниях участников Общества
+                  </a>
+                </p>
               </div>
             </div>
           </div>
